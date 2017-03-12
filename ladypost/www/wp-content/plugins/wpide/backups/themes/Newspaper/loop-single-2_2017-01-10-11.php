@@ -45,7 +45,7 @@ if (have_posts()) {
                     white-space: nowrap;background-color: white;">ADVERTISEMENT</span>
             </div>
                 
-            <span style="font-weight: bold;float:left;padding-top: 120px;font-size: 20px;">You May Like</span>
+            <span style="font-weight: bold;float:left;font-size: 20px;">You May Like</span>
             <div id="rcjsload_b20e03"></div>
             <script type="text/javascript">
             (function() {
