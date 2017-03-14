@@ -1,9 +1,9 @@
 <?php
 
-define( 'WPCACHEHOME', '/home/trendy/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', 'D:\Projects\Ramsterz\sites\trendy/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_CACHE', true); //Added by WP-Cache Manager
-define('DB_NAME', 'trendy');
-define('DB_USER', 'trendy');
+define('DB_NAME', 'trendypost');
+define('DB_USER', 'trendypost');
 define('DB_PASSWORD', 'admin');
 define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
@@ -20,7 +20,7 @@ define('NONCE_SALT', 'e01fb75951eaa1d7369210315eafa20d36a8c70217e044aa1afa794f08
 
 $table_prefix  = 'wp_';
 
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 define('WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
 define('WP_HOME', 'http://' . $_SERVER['HTTP_HOST'] . '/');

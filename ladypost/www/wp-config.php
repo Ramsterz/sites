@@ -1,7 +1,7 @@
 <?php
 
 define('WP_CACHE', true); //Added by WP-Cache Manager
-define( 'WPCACHEHOME', '/home/ladypost/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', 'D:\Projects\Ramsterz\sites\ladypost/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] );
 define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME'] );
 
