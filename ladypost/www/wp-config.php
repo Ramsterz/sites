@@ -7,8 +7,8 @@ define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME'] );
 
 define('DB_NAME', 'ladypost');
 define('DB_USER', 'ladypost');
-define('DB_PASSWORD', 'dRVFdrWYY9xz73af');
-define('DB_HOST', 'ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com');
+define('DB_PASSWORD', 'admin');
+define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
@@ -23,7 +23,7 @@ define('NONCE_SALT', '7e2604306d0a759a7ff921acb8940e810f5eeeceaa12c3da8085783e9d
 
 $table_prefix  = 'wp_';
 
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
