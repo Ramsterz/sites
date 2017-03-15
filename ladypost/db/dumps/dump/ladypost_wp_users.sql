@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: ladypost
+-- Host: localhost    Database: ladypost
 -- ------------------------------------------------------
--- Server version	5.6.27-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -46,7 +46,7 @@ CREATE TABLE `wp_users` (
 
 LOCK TABLES `wp_users` WRITE;
 /*!40000 ALTER TABLE `wp_users` DISABLE KEYS */;
-INSERT INTO `wp_users` VALUES (1,'admin-user','$P$BoT0B0m4RYqnMlOeauVm6s6rPs9uTn.','user','user@example.com','','2016-10-24 13:57:15','',0,'user'),(2,'roy_levi','$P$BOssUfmw1KuCzVSCsf2DOGaitkM8pF.','roy_levi','info@ramsterz.com','','2016-12-01 11:34:00','',0,'V. Ward'),(4,'T. Berger','$P$BK6bR6vOSgT.btCF79df2vO0L/HhYV/','t-berger','Tomas.content@ramsterz.com','','2017-01-24 14:31:34','1485268294:$P$BCwJCwQiteAPj9/07zwksUogq44buw/',0,'Tomas Berger');
+INSERT INTO `wp_users` VALUES (1,'admin-user','$P$BoT0B0m4RYqnMlOeauVm6s6rPs9uTn.','user','user@example.com','','2016-10-24 13:57:15','',0,'user'),(2,'admin','$P$BS0goG6yRIOSB8uebGw1FMjFOQ7/pY1','roy_levi','info@ramsterz.com','','2016-12-01 11:34:00','',0,'V. Ward'),(4,'T. Berger','$P$BK6bR6vOSgT.btCF79df2vO0L/HhYV/','t-berger','Tomas.content@ramsterz.com','','2017-01-24 14:31:34','1485268294:$P$BCwJCwQiteAPj9/07zwksUogq44buw/',0,'Tomas Berger');
 /*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-14 17:32:06
+-- Dump completed

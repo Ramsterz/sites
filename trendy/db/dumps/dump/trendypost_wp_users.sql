@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: trendypost
+-- Host: localhost    Database: trendypost
 -- ------------------------------------------------------
--- Server version	5.6.27-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -46,7 +46,7 @@ CREATE TABLE `wp_users` (
 
 LOCK TABLES `wp_users` WRITE;
 /*!40000 ALTER TABLE `wp_users` DISABLE KEYS */;
-INSERT INTO `wp_users` VALUES (1,'roy_levy','$P$BbDQdCgYjJVOMdzNOWWUUXvMH/PNPI/','roy_levy','info@ramsterz.com','','2016-02-19 17:04:18','',0,'Tony Montana'),(2,'Tyler Durden','$P$BWR0Nd0GVKze3/1RpZ8pgPA7H8Dx5X.','tyler-durden','rnlelectronics@gmail.com','','2016-03-12 14:20:36','1457792437:$P$BPmWXlJ2tGlgolXEaHurzq/eb2V3Cx.',0,'Tyler Durden'),(5,'T. Berger','$P$BoFv.bR/rvBo9cktFVsbmJ1aUTGn3h.','t-berger','Tomas.content@ramsterz.com','','2017-01-24 11:04:30','1485255870:$P$BFndfe5fueTITnxfePPU8v5yVr2LZp.',0,'Tomas Berger');
+INSERT INTO `wp_users` VALUES (1,'admin','$P$Bh0RgRQtc4L3xGaiHWcFjvv8eFCwEu1','roy_levy','info@ramsterz.com','','2016-02-19 17:04:18','',0,'Tony Montana'),(2,'Tyler Durden','$P$BWR0Nd0GVKze3/1RpZ8pgPA7H8Dx5X.','tyler-durden','rnlelectronics@gmail.com','','2016-03-12 14:20:36','1457792437:$P$BPmWXlJ2tGlgolXEaHurzq/eb2V3Cx.',0,'Tyler Durden'),(5,'T. Berger','$P$BoFv.bR/rvBo9cktFVsbmJ1aUTGn3h.','t-berger','Tomas.content@ramsterz.com','','2017-01-24 11:04:30','1485255870:$P$BFndfe5fueTITnxfePPU8v5yVr2LZp.',0,'Tomas Berger');
 /*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-14 17:37:05
+-- Dump completed
