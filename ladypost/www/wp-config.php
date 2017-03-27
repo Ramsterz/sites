@@ -1,7 +1,7 @@
 <?php
 
 define('WP_CACHE', true); //Added by WP-Cache Manager
-define( 'WPCACHEHOME', 'D:\Projects\Ramsterz\sites\ladypost/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/projects/sites/ladypost/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] );
 define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME'] );
 
@@ -23,7 +23,7 @@ define('NONCE_SALT', '7e2604306d0a759a7ff921acb8940e810f5eeeceaa12c3da8085783e9d
 
 $table_prefix  = 'wp_';
 
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');

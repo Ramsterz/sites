@@ -1,6 +1,6 @@
 <?php
 
-define( 'WPCACHEHOME', 'D:\Projects\Ramsterz\sites\feelsyou\www\wp-content\plugins\wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/projects/sites/feelsyou/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] );
 define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME'] );
 
@@ -26,7 +26,7 @@ define('NONCE_SALT',       'm:M-cM&@J<]7=`/@3)xT{gnQ,c}lbL?<NfkYtu2dW9c>gl[.kL }
 
 $table_prefix  = 'wp_';
 
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
