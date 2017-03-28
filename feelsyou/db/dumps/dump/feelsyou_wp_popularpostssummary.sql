@@ -33,7 +33,7 @@ CREATE TABLE `wp_popularpostssummary` (
   KEY `postid` (`postid`),
   KEY `view_date` (`view_date`),
   KEY `last_viewed` (`last_viewed`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `wp_popularpostssummary` (
 
 LOCK TABLES `wp_popularpostssummary` WRITE;
 /*!40000 ALTER TABLE `wp_popularpostssummary` DISABLE KEYS */;
+INSERT INTO `wp_popularpostssummary` VALUES (1,836,100,'2017-03-28','2017-03-28 07:04:09');
 /*!40000 ALTER TABLE `wp_popularpostssummary` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
