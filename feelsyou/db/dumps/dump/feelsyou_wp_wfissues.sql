@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfissues`
+-- Table structure for table `wp_wfIssues`
 --
 
-DROP TABLE IF EXISTS `wp_wfissues`;
+DROP TABLE IF EXISTS `wp_wfIssues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfissues` (
+CREATE TABLE `wp_wfIssues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `time` int(10) unsigned NOT NULL,
   `status` varchar(10) NOT NULL,
@@ -38,13 +38,13 @@ CREATE TABLE `wp_wfissues` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfissues`
+-- Dumping data for table `wp_wfIssues`
 --
 
-LOCK TABLES `wp_wfissues` WRITE;
-/*!40000 ALTER TABLE `wp_wfissues` DISABLE KEYS */;
-INSERT INTO `wp_wfissues` VALUES (2,1479221277,'new','wfPluginUpgrade',2,'fb9dd795b919ac5c9b7be6da7002b044','fb9dd795b919ac5c9b7be6da7002b044','The Plugin \"WPBakery Visual Composer\" needs an upgrade (4.12 -> 5.0).','You need to upgrade \"WPBakery Visual Composer\" to the newest version to ensure you have any security fixes the developer has released.','a:16:{s:4:\"Name\";s:24:\"WPBakery Visual Composer\";s:9:\"PluginURI\";s:22:\"http://vc.wpbakery.com\";s:7:\"Version\";s:4:\"4.12\";s:11:\"Description\";s:233:\"Drag and drop page builder for WordPress. Take full control over your WordPress site, build any layout you can imagine – no programming knowledge required. <cite>By <a href=\"http://wpbakery.com\">Michael M - WPBakery.com</a>.</cite>\";s:6:\"Author\";s:58:\"<a href=\"http://wpbakery.com\">Michael M - WPBakery.com</a>\";s:9:\"AuthorURI\";s:19:\"http://wpbakery.com\";s:10:\"TextDomain\";s:11:\"js_composer\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:5:\"Title\";s:61:\"<a href=\"http://vc.wpbakery.com\">WPBakery Visual Composer</a>\";s:10:\"AuthorName\";s:24:\"Michael M - WPBakery.com\";s:10:\"pluginFile\";s:73:\"/home/feelsyou/public_html/wp-content/plugins/js_composer/js_composer.php\";s:10:\"newVersion\";s:3:\"5.0\";s:4:\"slug\";s:11:\"js_composer\";s:5:\"wpURL\";s:0:\"\";s:20:\"vulnerabilityPatched\";b:0;}');
-/*!40000 ALTER TABLE `wp_wfissues` ENABLE KEYS */;
+LOCK TABLES `wp_wfIssues` WRITE;
+/*!40000 ALTER TABLE `wp_wfIssues` DISABLE KEYS */;
+INSERT INTO `wp_wfIssues` VALUES (2,1479221277,'new','wfPluginUpgrade',2,'fb9dd795b919ac5c9b7be6da7002b044','fb9dd795b919ac5c9b7be6da7002b044','The Plugin \"WPBakery Visual Composer\" needs an upgrade (4.12 -> 5.0).','You need to upgrade \"WPBakery Visual Composer\" to the newest version to ensure you have any security fixes the developer has released.','a:16:{s:4:\"Name\";s:24:\"WPBakery Visual Composer\";s:9:\"PluginURI\";s:22:\"http://vc.wpbakery.com\";s:7:\"Version\";s:4:\"4.12\";s:11:\"Description\";s:233:\"Drag and drop page builder for WordPress. Take full control over your WordPress site, build any layout you can imagine – no programming knowledge required. <cite>By <a href=\"http://wpbakery.com\">Michael M - WPBakery.com</a>.</cite>\";s:6:\"Author\";s:58:\"<a href=\"http://wpbakery.com\">Michael M - WPBakery.com</a>\";s:9:\"AuthorURI\";s:19:\"http://wpbakery.com\";s:10:\"TextDomain\";s:11:\"js_composer\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:5:\"Title\";s:61:\"<a href=\"http://vc.wpbakery.com\">WPBakery Visual Composer</a>\";s:10:\"AuthorName\";s:24:\"Michael M - WPBakery.com\";s:10:\"pluginFile\";s:73:\"/home/feelsyou/public_html/wp-content/plugins/js_composer/js_composer.php\";s:10:\"newVersion\";s:3:\"5.0\";s:4:\"slug\";s:11:\"js_composer\";s:5:\"wpURL\";s:0:\"\";s:20:\"vulnerabilityPatched\";b:0;}');
+/*!40000 ALTER TABLE `wp_wfIssues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

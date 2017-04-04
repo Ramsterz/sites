@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfblockediplog`
+-- Table structure for table `wp_wfBlockedIPLog`
 --
 
-DROP TABLE IF EXISTS `wp_wfblockediplog`;
+DROP TABLE IF EXISTS `wp_wfBlockedIPLog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfblockediplog` (
+CREATE TABLE `wp_wfBlockedIPLog` (
   `IP` binary(16) NOT NULL DEFAULT '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
   `countryCode` varchar(2) NOT NULL,
   `blockCount` int(10) unsigned NOT NULL DEFAULT '0',
@@ -32,13 +32,13 @@ CREATE TABLE `wp_wfblockediplog` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfblockediplog`
+-- Dumping data for table `wp_wfBlockedIPLog`
 --
 
-LOCK TABLES `wp_wfblockediplog` WRITE;
-/*!40000 ALTER TABLE `wp_wfblockediplog` DISABLE KEYS */;
-INSERT INTO `wp_wfblockediplog` VALUES ('\0\0\0\0\0\0\0\0\0\0ÿÿ¼xšZ','IL',1,17120);
-/*!40000 ALTER TABLE `wp_wfblockediplog` ENABLE KEYS */;
+LOCK TABLES `wp_wfBlockedIPLog` WRITE;
+/*!40000 ALTER TABLE `wp_wfBlockedIPLog` DISABLE KEYS */;
+INSERT INTO `wp_wfBlockedIPLog` VALUES ('\0\0\0\0\0\0\0\0\0\0ÿÿ¼xšZ','IL',1,17120);
+/*!40000 ALTER TABLE `wp_wfBlockedIPLog` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

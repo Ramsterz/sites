@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `wp_users` (
   KEY `user_login_key` (`user_login`),
   KEY `user_nicename` (`user_nicename`),
   KEY `user_email` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `wp_users` (
 
 LOCK TABLES `wp_users` WRITE;
 /*!40000 ALTER TABLE `wp_users` DISABLE KEYS */;
-INSERT INTO `wp_users` VALUES (1,'admin','$P$BJxY.6s2iSCwI2VqtRRESR3O6x22R6.','admin','info@ramsterz.com','','2016-08-13 05:13:49','',0,'Z. Stardust'),(2,'T. Berger','$P$Bphn/zXsy74dIjvFp/iw9sYD2oghns.','t-berger','Tomas.content@ramsterz.com','','2017-01-24 10:58:42','1485255522:$P$BX5q2Dmev7T0nV/fpvIRZ1CmhSQIsJ0',0,'Tomas Berger');
+INSERT INTO `wp_users` VALUES (1,'admin','$P$BgNNrZ1mNMrMknr6.IfnAN57s.oeZH.','admin','info@ramsterz.com','','2016-08-13 05:13:49','',0,'Z. Stardust'),(2,'T. Berger','$P$Bphn/zXsy74dIjvFp/iw9sYD2oghns.','t-berger','Tomas.content@ramsterz.com','','2017-01-24 10:58:42','1485255522:$P$BX5q2Dmev7T0nV/fpvIRZ1CmhSQIsJ0',0,'Tomas Berger'),(3,'Beryl.A','$P$Be.GXep2JjCvpELlMnyu3e1.lOU7Ps/','beryl-a','r61info@gmail.com','','2017-03-22 13:11:12','1490188272:$P$Bpeeed457yHxJX3ebfz1f6Jru2G5h00',0,'Beryl.A');
 /*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

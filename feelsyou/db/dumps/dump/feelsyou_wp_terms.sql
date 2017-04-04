@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `wp_terms` (
   PRIMARY KEY (`term_id`),
   KEY `slug` (`slug`(191)),
   KEY `name` (`name`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `wp_terms` (
 
 LOCK TABLES `wp_terms` WRITE;
 /*!40000 ALTER TABLE `wp_terms` DISABLE KEYS */;
-INSERT INTO `wp_terms` VALUES (1,'Uncategorized','uncategorized',0),(2,'Featured','featured',0),(3,'Home','home',0),(4,'td-demo-header-menu','td-demo-header-menu',0),(5,'td-demo-footer-menu','td-demo-footer-menu',0),(6,'Trending','trending',0),(7,'Shocking','shocking',0),(8,'Funny','funny',0),(9,'Entertainment','entertainment',0),(10,'Celebs','celebs',0),(11,'Business','business',0),(12,'Traveling','traveling',0),(13,'Lifestyle','lifestyle',0),(14,'News','news',0),(15,'Sport','sport',0),(16,'Gender Reassignment Surgery','gender-reassignment-surgery',0),(17,'Celebs','celebs',0);
+INSERT INTO `wp_terms` VALUES (1,'Uncategorized','uncategorized',0),(2,'Featured','featured',0),(3,'Home','home',0),(4,'td-demo-header-menu','td-demo-header-menu',0),(5,'td-demo-footer-menu','td-demo-footer-menu',0),(6,'Trending','trending',0),(7,'Shocking','shocking',0),(8,'Funny','funny',0),(9,'Entertainment','entertainment',0),(10,'Celebs','celebs',0),(11,'Business','business',0),(12,'Traveling','traveling',0),(13,'Lifestyle','lifestyle',0),(14,'News','news',0),(15,'Sport','sport',0),(16,'Gender Reassignment Surgery','gender-reassignment-surgery',0),(17,'Celebs','celebs',0),(18,'Facts on Celebrities','facts-on-celebrities',0),(19,'Celebrities who killed themselves','celebrities-who-killed-themselves',0),(20,'Famous celebrity death','famous-celebrity-death',0),(21,'Celebrity Lives','celebrity-lives',0);
 /*!40000 ALTER TABLE `wp_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

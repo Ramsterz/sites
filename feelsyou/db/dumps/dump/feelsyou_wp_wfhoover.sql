@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfhoover`
+-- Table structure for table `wp_wfHoover`
 --
 
-DROP TABLE IF EXISTS `wp_wfhoover`;
+DROP TABLE IF EXISTS `wp_wfHoover`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfhoover` (
+CREATE TABLE `wp_wfHoover` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `owner` text,
   `host` text,
@@ -34,12 +34,12 @@ CREATE TABLE `wp_wfhoover` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfhoover`
+-- Dumping data for table `wp_wfHoover`
 --
 
-LOCK TABLES `wp_wfhoover` WRITE;
-/*!40000 ALTER TABLE `wp_wfhoover` DISABLE KEYS */;
-/*!40000 ALTER TABLE `wp_wfhoover` ENABLE KEYS */;
+LOCK TABLES `wp_wfHoover` WRITE;
+/*!40000 ALTER TABLE `wp_wfHoover` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wp_wfHoover` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `wp_term_taxonomy` (
   PRIMARY KEY (`term_taxonomy_id`),
   UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
   KEY `taxonomy` (`taxonomy`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `wp_term_taxonomy` (
 
 LOCK TABLES `wp_term_taxonomy` WRITE;
 /*!40000 ALTER TABLE `wp_term_taxonomy` DISABLE KEYS */;
-INSERT INTO `wp_term_taxonomy` VALUES (1,1,'category','',0,12),(2,2,'category','Featured posts',0,7),(3,3,'nav_menu','',0,1),(4,4,'nav_menu','',0,5),(5,5,'nav_menu','',0,4),(6,6,'category','',0,16),(7,7,'category','',6,4),(8,8,'category','',6,3),(9,9,'category','',6,16),(10,10,'category','',6,16),(11,11,'category','',0,5),(12,12,'category','',0,1),(13,13,'category','',0,9),(14,14,'category','',0,4),(15,15,'category','',0,4),(16,16,'post_tag','',0,1),(17,17,'post_tag','',0,1);
+INSERT INTO `wp_term_taxonomy` VALUES (1,1,'category','',0,6),(2,2,'category','Featured posts',0,7),(3,3,'nav_menu','',0,1),(4,4,'nav_menu','',0,5),(5,5,'nav_menu','',0,4),(6,6,'category','',0,17),(7,7,'category','',6,5),(8,8,'category','',6,4),(9,9,'category','',6,17),(10,10,'category','',6,18),(11,11,'category','',0,5),(12,12,'category','',0,2),(13,13,'category','',0,10),(14,14,'category','',0,5),(15,15,'category','',0,4),(16,16,'post_tag','',0,1),(17,17,'post_tag','',0,2),(18,18,'post_tag','',0,1),(19,19,'post_tag','',0,1),(20,20,'post_tag','',0,1),(21,21,'post_tag','',0,1);
 /*!40000 ALTER TABLE `wp_term_taxonomy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

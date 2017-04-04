@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: feelsyou
+-- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.6.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfthrottlelog`
+-- Table structure for table `wp_wfThrottleLog`
 --
 
-DROP TABLE IF EXISTS `wp_wfthrottlelog`;
+DROP TABLE IF EXISTS `wp_wfThrottleLog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfthrottlelog` (
+CREATE TABLE `wp_wfThrottleLog` (
   `IP` binary(16) NOT NULL DEFAULT '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
   `startTime` int(10) unsigned NOT NULL,
   `endTime` int(10) unsigned NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE `wp_wfthrottlelog` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfthrottlelog`
+-- Dumping data for table `wp_wfThrottleLog`
 --
 
-LOCK TABLES `wp_wfthrottlelog` WRITE;
-/*!40000 ALTER TABLE `wp_wfthrottlelog` DISABLE KEYS */;
-/*!40000 ALTER TABLE `wp_wfthrottlelog` ENABLE KEYS */;
+LOCK TABLES `wp_wfThrottleLog` WRITE;
+/*!40000 ALTER TABLE `wp_wfThrottleLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wp_wfThrottleLog` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
