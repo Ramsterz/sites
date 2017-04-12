@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
+-- Host: localhost    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.6.27-log
+-- Server version	5.7.17-0ubuntu0.16.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfSNIPCache`
+-- Table structure for table `wp_wfsnipcache`
 --
 
-DROP TABLE IF EXISTS `wp_wfSNIPCache`;
+DROP TABLE IF EXISTS `wp_wfsnipcache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfSNIPCache` (
+CREATE TABLE `wp_wfsnipcache` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `IP` varchar(45) NOT NULL DEFAULT '',
   `expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -35,13 +35,13 @@ CREATE TABLE `wp_wfSNIPCache` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfSNIPCache`
+-- Dumping data for table `wp_wfsnipcache`
 --
 
-LOCK TABLES `wp_wfSNIPCache` WRITE;
-/*!40000 ALTER TABLE `wp_wfSNIPCache` DISABLE KEYS */;
-INSERT INTO `wp_wfSNIPCache` VALUES (1,'188.120.154.90','2016-11-15 14:52:30','',0);
-/*!40000 ALTER TABLE `wp_wfSNIPCache` ENABLE KEYS */;
+LOCK TABLES `wp_wfsnipcache` WRITE;
+/*!40000 ALTER TABLE `wp_wfsnipcache` DISABLE KEYS */;
+INSERT INTO `wp_wfsnipcache` VALUES (1,'188.120.154.90','2016-11-15 14:52:30','',0);
+/*!40000 ALTER TABLE `wp_wfsnipcache` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

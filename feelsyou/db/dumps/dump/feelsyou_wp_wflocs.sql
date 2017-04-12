@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
+-- Host: localhost    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.6.27-log
+-- Server version	5.7.17-0ubuntu0.16.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfLocs`
+-- Table structure for table `wp_wflocs`
 --
 
-DROP TABLE IF EXISTS `wp_wfLocs`;
+DROP TABLE IF EXISTS `wp_wflocs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfLocs` (
+CREATE TABLE `wp_wflocs` (
   `IP` binary(16) NOT NULL DEFAULT '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
   `ctime` int(10) unsigned NOT NULL,
   `failed` tinyint(3) unsigned NOT NULL,
@@ -37,13 +37,13 @@ CREATE TABLE `wp_wfLocs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfLocs`
+-- Dumping data for table `wp_wflocs`
 --
 
-LOCK TABLES `wp_wfLocs` WRITE;
-/*!40000 ALTER TABLE `wp_wfLocs` DISABLE KEYS */;
-INSERT INTO `wp_wfLocs` VALUES ('\0\0\0\0\0\0\0\0\0\0ÿÿ\Ìö´A',1479220457,0,'Seattle','Washington','United States','US',47.6102982,-122.3340988);
-/*!40000 ALTER TABLE `wp_wfLocs` ENABLE KEYS */;
+LOCK TABLES `wp_wflocs` WRITE;
+/*!40000 ALTER TABLE `wp_wflocs` DISABLE KEYS */;
+INSERT INTO `wp_wflocs` VALUES ('\0\0\0\0\0\0\0\0\0\0ÿÿ\Ìö´A',1479220457,0,'Seattle','Washington','United States','US',47.6102982,-122.3340988);
+/*!40000 ALTER TABLE `wp_wflocs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

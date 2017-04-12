@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com    Database: feelsyou
+-- Host: localhost    Database: feelsyou
 -- ------------------------------------------------------
--- Server version	5.6.27-log
+-- Server version	5.7.17-0ubuntu0.16.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `wp_wfBlocksAdv`
+-- Table structure for table `wp_wfblocksadv`
 --
 
-DROP TABLE IF EXISTS `wp_wfBlocksAdv`;
+DROP TABLE IF EXISTS `wp_wfblocksadv`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wp_wfBlocksAdv` (
+CREATE TABLE `wp_wfblocksadv` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `blockType` char(2) NOT NULL,
   `blockString` varchar(255) NOT NULL,
@@ -35,12 +35,12 @@ CREATE TABLE `wp_wfBlocksAdv` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wp_wfBlocksAdv`
+-- Dumping data for table `wp_wfblocksadv`
 --
 
-LOCK TABLES `wp_wfBlocksAdv` WRITE;
-/*!40000 ALTER TABLE `wp_wfBlocksAdv` DISABLE KEYS */;
-/*!40000 ALTER TABLE `wp_wfBlocksAdv` ENABLE KEYS */;
+LOCK TABLES `wp_wfblocksadv` WRITE;
+/*!40000 ALTER TABLE `wp_wfblocksadv` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wp_wfblocksadv` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
