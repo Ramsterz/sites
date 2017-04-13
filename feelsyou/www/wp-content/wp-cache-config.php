@@ -5,6 +5,12 @@ WP-Cache Config Sample File
 See wp-cache.php for author details.
 */
 
+$wp_cache_preload_on = 0; //Added by WP-Cache Manager
+$wp_cache_preload_taxonomies = 0; //Added by WP-Cache Manager
+$wp_cache_preload_email_volume = 'many'; //Added by WP-Cache Manager
+$wp_cache_preload_email_me = 0; //Added by WP-Cache Manager
+$wp_cache_preload_interval = 0; //Added by WP-Cache Manager
+$wp_cache_preload_posts = '53'; //Added by WP-Cache Manager
 $cache_time_interval = '600'; //Added by WP-Cache Manager
 $cache_schedule_type = 'interval'; //Added by WP-Cache Manager
 $dismiss_readable_warning = 1; //Added by WP-Cache Manager
@@ -15,7 +21,7 @@ $wp_cache_make_known_anon = 0; //Added by WP-Cache Manager
 $wp_cache_mod_rewrite = 0; //Added by WP-Cache Manager
 $wp_cache_front_page_checks = 0; //Added by WP-Cache Manager
 $wp_cache_mfunc_enabled = 0; //Added by WP-Cache Manager
-$wp_supercache_304 = 1; //Added by WP-Cache Manager
+$wp_supercache_304 = 0; //Added by WP-Cache Manager
 $wp_cache_no_cache_for_get = 0; //Added by WP-Cache Manager
 $wp_cache_disable_utf8 = 0; //Added by WP-Cache Manager
 $cache_page_secret = '6400041213b9558f6a152ad8b3259e95'; //Added by WP-Cache Manager
@@ -28,7 +34,7 @@ $cache_enabled = true; //Added by WP-Cache Manager
 $super_cache_enabled = true; //Added by WP-Cache Manager
 $cache_max_time = '1800'; //Added by WP-Cache Manager
 //$use_flock = true; // Set it true or false if you know what to use
-$cache_path = 'D:\Projects\Ramsterz\sites\feelsyou\www/wp-content/cache/'; //Added by WP-Cache Manager
+$cache_path = '/projects/sites/feelsyou/www/wp-content/cache'; //Added by WP-Cache Manager
 $file_prefix = 'wp-cache-';
 $ossdlcdn = 0; //Added by WP-Cache Manager
 
@@ -43,7 +49,7 @@ $cache_rebuild_files = 1; //Added by WP-Cache Manager
 // Disable the file locking system.
 // If you are experiencing problems with clearing or creating cache files
 // uncommenting this may help.
-$wp_cache_mutex_disabled = 0; //Added by WP-Cache Manager
+$wp_cache_mutex_disabled = 1; //Added by WP-Cache Manager
 
 // Just modify it if you have conflicts with semaphores
 $sem_id = 1309566033; //Added by WP-Cache Manager
