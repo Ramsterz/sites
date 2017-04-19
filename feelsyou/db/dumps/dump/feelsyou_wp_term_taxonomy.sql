@@ -41,7 +41,7 @@ CREATE TABLE `wp_term_taxonomy` (
 
 LOCK TABLES `wp_term_taxonomy` WRITE;
 /*!40000 ALTER TABLE `wp_term_taxonomy` DISABLE KEYS */;
-INSERT INTO `wp_term_taxonomy` VALUES (1,1,'category','',0,6),(2,2,'category','Featured posts',0,7),(3,3,'nav_menu','',0,1),(4,4,'nav_menu','',0,5),(5,5,'nav_menu','',0,4),(6,6,'category','',0,17),(7,7,'category','',6,5),(8,8,'category','',6,4),(9,9,'category','',6,17),(10,10,'category','',6,18),(11,11,'category','',0,5),(12,12,'category','',0,2),(13,13,'category','',0,10),(14,14,'category','',0,5),(15,15,'category','',0,4),(16,16,'post_tag','',0,1),(17,17,'post_tag','',0,2),(18,18,'post_tag','',0,1),(19,19,'post_tag','',0,1),(20,20,'post_tag','',0,1),(21,21,'post_tag','',0,1);
+INSERT INTO `wp_term_taxonomy` VALUES (1,1,'category','',0,2),(2,2,'category','Featured posts',0,7),(3,3,'nav_menu','',0,1),(4,4,'nav_menu','',0,5),(5,5,'nav_menu','',0,4),(6,6,'category','',0,19),(7,7,'category','',6,8),(8,8,'category','',6,4),(9,9,'category','',6,18),(10,10,'category','',6,20),(11,11,'category','',0,6),(12,12,'category','',0,3),(13,13,'category','',0,13),(14,14,'category','',0,7),(15,15,'category','',0,4),(16,16,'post_tag','',0,1),(17,17,'post_tag','',0,2),(18,18,'post_tag','',0,1),(19,19,'post_tag','',0,1),(20,20,'post_tag','',0,1),(21,21,'post_tag','',0,1);
 /*!40000 ALTER TABLE `wp_term_taxonomy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
