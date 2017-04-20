@@ -448,7 +448,7 @@ if ( ! class_exists( 'WPAlchemy_MetaBox' ) ) {
          */
         var $_loop_data;
 
-        function __construct($arr)
+        function WPAlchemy_MetaBox($arr)
         {
             $this->_loop_data = new stdClass;
 

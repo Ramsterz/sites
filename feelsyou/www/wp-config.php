@@ -1,6 +1,6 @@
 <?php
 
-define( 'WPCACHEHOME', '/projects/sites/feelsyou/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/home/feelsyou/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] );
 define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME'] );
 
@@ -10,8 +10,8 @@ define('WP_CACHE', true); //Added by WP-Cache Manager
 define('DB_NAME', 'feelsyou');
 
 define('DB_USER', 'feelsyou');
-define('DB_PASSWORD', 'admin');
-define('DB_HOST', 'localhost');
+define('DB_PASSWORD', 'FvATe5BL5czV5CnH');
+define('DB_HOST', 'ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com');
 define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
 
