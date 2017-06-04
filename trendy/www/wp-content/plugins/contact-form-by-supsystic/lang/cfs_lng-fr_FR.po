@@ -2173,7 +2173,7 @@ msgid "Your secret key, generated on <a href=\"%s\" target=\"_blank\">%s</a>."
 msgstr "Votre clé secrète, générée sur <a href=\"%s\" target=\"_blank\">%s</a> ."
 
 #: ../modules/forms/views/tpl/formsEditFormFields.php:237
-msgid "reCapthca Theme"
+msgid "reCaptcha Theme"
 msgstr "Thème du reCaptcha"
 
 #: ../modules/forms/views/tpl/formsEditFormFields.php:238
@@ -2189,8 +2189,8 @@ msgid "Dark"
 msgstr "Foncé"
 
 #: ../modules/forms/views/tpl/formsEditFormFields.php:249
-msgid "reCapthca Type"
-msgstr "Type de reCapthca"
+msgid "reCaptcha Type"
+msgstr "Type de reCaptcha"
 
 #: ../modules/forms/views/tpl/formsEditFormFields.php:250
 msgid "The type of CAPTCHA to serve."
@@ -2201,8 +2201,8 @@ msgid "Audio"
 msgstr "Audio"
 
 #: ../modules/forms/views/tpl/formsEditFormFields.php:261
-msgid "reCapthca Size"
-msgstr "Taille du reCapthca"
+msgid "reCaptcha Size"
+msgstr "Taille du reCaptcha"
 
 #: ../modules/forms/views/tpl/formsEditFormFields.php:262
 msgid "The size of the CAPTCHA widget."

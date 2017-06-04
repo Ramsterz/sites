@@ -106,7 +106,7 @@ jQuery.fn.serializeAnythingCfs = function(addData, returnArray) {
     var toReturn = returnArray ? {} : []
     ,	els = jQuery(this).find(':input').get();
     jQuery.each(els, function() {
-        if (this.name && !this.disabled && (this.checked || /select|textarea/i.test(this.nodeName) || /text|hidden|password/i.test(this.type))) {
+        if (this.name && !this.disabled && (this.checked || /select|textarea/i.test(this.nodeName) || /text|hidden|password|number/i.test(this.type))) {
             var val = jQuery(this).val();
 			if(returnArray) {
 				toReturn[ this.name ] = val;
@@ -705,4 +705,8 @@ function toNumberCurrencyCfs( str ) {
 }
 function numberCurrencyToStrCfs( numPattern ) {
 	return cfs_str_replace( numPattern.strPattern, '{{NUM}}', numPattern.num );
+}
+function randCfs( min, max, returnFloat ) {
+	var rand = (Math.random() * (max - min)) + min;
+	return returnFloat ? rand : Math.round( rand );
 }

@@ -238,7 +238,12 @@ class frameCfs {
                 if(isset($permissions[CFS_USERLEVELS])
                     && !empty($permissions[CFS_USERLEVELS])
                 ) {
-					$res = true;
+					foreach($permissions[CFS_USERLEVELS] as $level => $methods) {
+						if(!empty($methods)) {
+							$res = true;
+							break;
+						}
+					}
                 }
             }
         }

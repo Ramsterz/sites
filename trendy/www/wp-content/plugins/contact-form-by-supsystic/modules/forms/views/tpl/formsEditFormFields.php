@@ -99,6 +99,10 @@
 			<i class="fa fa-cog"></i>
 			<?php _e('Basic Settings', CFS_LANG_CODE)?>
 		</a>
+		<a class="nav-tab" href="#cfsFormFieldIconSettings">
+			<i class="fa fa-picture-o"></i>
+			<?php _e('Icon', CFS_LANG_CODE)?>
+		</a>
 		<a class="nav-tab" href="#cfsFormFieldAdvancedSettings">
 			<i class="fa fa-cogs"></i>
 			<?php _e('Advanced', CFS_LANG_CODE)?>
@@ -133,7 +137,7 @@
 					<?php echo htmlCfs::text('label')?>
 				</td>
 			</tr>
-			<tr class="cfsFieldParamRow" data-not-for="selectlist,selectbox,checkbox,checkboxlist,radiobutton,radiobuttons,countryList,countryListMultiple,recaptcha,checkboxsubscribe,button,submit,reset">
+			<tr class="cfsFieldParamRow" data-not-for="selectlist,selectbox,checkbox,checkboxlist,radiobutton,radiobuttons,countryList,countryListMultiple,recaptcha,checkboxsubscribe,button,submit,reset,rating">
 				<th>
 					<?php _e('Placeholder', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Field placeholder - will be printed in your field as a tip.', CFS_LANG_CODE))?>"></i>
@@ -142,12 +146,38 @@
 					<?php echo htmlCfs::text('placeholder')?>
 				</td>
 			</tr>
+			<tr class="cfsFieldParamRow" data-for="rating">
+				<th>
+					<?php _e('Rate Stars Count', CFS_LANG_CODE)?>
+					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Number of icons for rating.', CFS_LANG_CODE))?>"></i>
+				</th>
+				<td>
+					<?php echo htmlCfs::number('rate_num', array(
+						'value' => 5,
+					))?>
+				</td>
+			</tr>
+			<tr class="cfsFieldParamRow" data-for="time">
+				<th>
+					<?php _e('Time Format', CFS_LANG_CODE)?>
+					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Format for your Time input.', CFS_LANG_CODE))?>"></i>
+				</th>
+				<td>
+					<?php echo htmlCfs::selectbox('time_format', array(
+						'options' => array(
+							'am_pm' => 'AM / PM'
+						,	'24h' => __('24 Hours', CFS_LANG_CODE)
+						),
+						'value' => 'am_pm',
+					))?>
+				</td>
+			</tr>
 			<tr class="cfsFieldEditErrorRow" data-for="label-placeholder">
 				<td colspan="2" class="description">
 					<?php _e('Please fill-in Label or Placeholder for your field - it\'s required for users to know - what field in Form that are filling-in.', CFS_LANG_CODE)?>
 				</td>
 			</tr>
-			<tr class="cfsFieldParamRow" data-not-for="file,recaptcha,button,submit,reset">
+			<tr class="cfsFieldParamRow cfsFieldFixedSelectRow" data-not-for="file,recaptcha,button,submit,reset,rating">
 				<th>
 					<?php _e('Default Value', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('You can set default value for your field, and one it appear on your site - field will be pre-filled with this value.', CFS_LANG_CODE))?>"></i>
@@ -190,12 +220,15 @@
 				<?php echo htmlCfs::hidden('params[fields][][display]')?>
 			</tr>
 			<tr class="cfsFieldsEditForLists cfsFieldParamRow" style="display: none;">
-				<th colspan="2">
+				<th>
 					<?php _e('Select Options', CFS_LANG_CODE)?>
-					<a class="button button-small cfsFieldsAddListOpt">
-						<i class="fa fa-plus"></i>
-					</a>
 				</th>
+				<td>
+					<a class="button cfsFieldsAddListOpt">
+						<i class="fa fa-plus"></i>
+						<?php _e('Add Option', CFS_LANG_CODE)?>
+					</a>
+				</td>
 			</tr>
 			<tr class="cfsFieldsEditForLists cfsFieldParamRow" style="display: none; height: auto;">
 				<td colspan="2" style="padding: 0;">
@@ -253,11 +286,78 @@
 			</tr>
 		</table>
 	</div>
+	<div id="cfsFormFieldIconSettings" class="cfsTabContent">
+		<table class="form-table">
+			<tr class="cfsFieldParamRow" data-not-for="file,recaptcha,reset,hidden">
+				<td colspan="2">
+					<?php if(!$this->isPro) { ?>
+						<?php $proLink = $this->mainLink. '?utm_source=plugin&utm_medium=field_icon&utm_campaign=forms'; ?>
+						<p style="margin-bottom: 10px;"><?php printf(__('This is PRO option. You can <a class="button" href="%s" target="_blank">Get PRO</a> with this and many other options <a href="%s" target="_blank">here</a>.', CFS_LANG_CODE), $proLink, $proLink)?></p>
+						<?php /*This link is required only for opening of PRO dialog wnd*/ ?>
+						<span class="cfsProOptMiniLabel" style="display: none;">
+							<a href="<?php echo $proLink;?>" target="_blank"><?php _e('PRO', CFS_LANG_CODE)?></a>
+						</span>
+					<?php }?>
+					<?php echo htmlCfs::text('icon_search', array(
+						'attrs' => 'placeholder="'. __('Search', CFS_LANG_CODE). '" id="cfsFieldIconSearchInp"',
+					))?>
+					<span id="cfsFieldIconSelected"></span>
+					<?php echo htmlCfs::hidden('icon_class', array(
+						'attrs' => 'id="cfsFieldIconClassInp"'
+					))?>
+					<br />
+					<ul id="cfsFieldIconsShell"></ul>
+				</td>
+			</tr>
+			<tr class="cfsFieldParamRow" data-not-for="file,recaptcha,reset,hidden">
+				<th>
+					<?php _e('Icon Size', CFS_LANG_CODE)?>
+					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Set size for icon, default is size like all other text.', CFS_LANG_CODE))?>"></i>
+				</th>
+				<td>
+					<?php echo htmlCfs::selectbox('icon_size', array(
+						'options' => array(
+							'' => __('Default', CFS_LANG_CODE),
+							'lg' => __('33% increase', CFS_LANG_CODE),
+							'2x' => __('2x', CFS_LANG_CODE),
+							'3x' => __('3x', CFS_LANG_CODE),
+							'4x' => __('4x', CFS_LANG_CODE),
+							'5x' => __('5x', CFS_LANG_CODE),
+						),
+						'attrs' => 'class="cfsProOpt"',
+					))?>
+				</td>
+			</tr>
+			<tr class="cfsFieldParamRow" data-not-for="file,recaptcha,reset,hidden">
+				<th>
+					<?php _e('Icon Color', CFS_LANG_CODE)?>
+					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Custom color for your icon.', CFS_LANG_CODE))?>"></i>
+				</th>
+				<td>
+					<?php echo htmlCfs::colorpicker('icon_color', array(
+						'attrs' => 'class="cfsProOpt"',
+					))?>
+				</td>
+			</tr>
+			<tr class="cfsFieldParamRow" data-for="rating">
+				<th>
+					<?php _e('Selected Color', CFS_LANG_CODE)?>
+					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Color for selected rating stars.', CFS_LANG_CODE))?>"></i>
+				</th>
+				<td>
+					<?php echo htmlCfs::colorpicker('icon_selected_color', array(
+						'attrs' => 'class="cfsProOpt"',
+					))?>
+				</td>
+			</tr>
+			
+		</table>
+	</div>
 	<div id="cfsFormFieldAdvancedSettings" class="cfsTabContent">
 		<table class="form-table">
 			<tr class="cfsFieldParamRow" data-for="recaptcha">
 				<th>
-					<?php _e('reCapthca Theme', CFS_LANG_CODE)?>
+					<?php _e('reCaptcha Theme', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(sprintf(__('The color theme. You can select from themes, provided by Google, for your reCaptcha. To get more info - check <a href="%s" target="_blank">our tutorial.</a>', CFS_LANG_CODE), 'http://supsystic.com/create-recaptcha-field/'))?>"></i>
 				</th>
 				<td>
@@ -269,7 +369,7 @@
 			</tr>
 			<tr class="cfsFieldParamRow" data-for="recaptcha">
 				<th>
-					<?php _e('reCapthca Type', CFS_LANG_CODE)?>
+					<?php _e('reCaptcha Type', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('The type of CAPTCHA to serve.', CFS_LANG_CODE))?>"></i>
 				</th>
 				<td>
@@ -281,7 +381,7 @@
 			</tr>
 			<tr class="cfsFieldParamRow" data-for="recaptcha">
 				<th>
-					<?php _e('reCapthca Size', CFS_LANG_CODE)?>
+					<?php _e('reCaptcha Size', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('The size of the CAPTCHA widget.', CFS_LANG_CODE))?>"></i>
 				</th>
 				<td>
@@ -322,7 +422,7 @@
 	</div>
 	<div id="cfsFormFieldValidation" class="cfsTabContent">
 		<table class="form-table">
-			<tr class="cfsFieldParamRow" data-for="text,email,textarea,number,date,month,week,time,color,range,url,file">
+			<tr class="cfsFieldParamRow" data-for="text,email,textarea,number,date,month,week,time,color,range,url,file,rating">
 				<th>
 					<?php _e('Minimum length', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Possibility to bound field minimum length.', CFS_LANG_CODE))?>"></i>
@@ -331,7 +431,7 @@
 					<?php echo htmlCfs::text('min_size')?>
 				</td>
 			</tr>
-			<tr class="cfsFieldParamRow" data-for="text,email,textarea,number,date,month,week,time,color,range,url,file">
+			<tr class="cfsFieldParamRow" data-for="text,email,textarea,number,date,month,week,time,color,range,url,file,rating">
 				<th>
 					<?php _e('Maximum length', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Possibility to bound field maximum length. For Files fields types - this is restriction for file size, in Mb.', CFS_LANG_CODE))?>"></i>
@@ -340,7 +440,7 @@
 					<?php echo htmlCfs::text('max_size')?>
 				</td>
 			</tr>
-			<tr class="cfsFieldParamRow" data-for="text,textarea,email,url,date,time,number">
+			<tr class="cfsFieldParamRow" data-for="text,textarea,email,url,date,time,number,rating">
 				<th>
 					<?php _e('Only numbers', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Allow users to enter in this field - only numeric values.', CFS_LANG_CODE))?>"></i>
@@ -349,7 +449,7 @@
 					<?php echo htmlCfs::checkbox('vn_only_number')?>
 				</td>
 			</tr>
-			<tr class="cfsFieldParamRow" data-for="text,textarea,email,url,date,time,number">
+			<tr class="cfsFieldParamRow" data-for="text,textarea,email,url,date,time,number,rating">
 				<th>
 					<?php _e('Only letters', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Only letters will be allowed.', CFS_LANG_CODE))?>"></i>
@@ -358,7 +458,7 @@
 					<?php echo htmlCfs::checkbox('vn_only_letters')?>
 				</td>
 			</tr>
-			<tr class="cfsFieldParamRow" data-for="text,textarea,email,url,date,time,number,file">
+			<tr class="cfsFieldParamRow" data-for="text,textarea,email,url,date,time,number,file,rating">
 				<th>
 					<?php _e('Validation Pattern', CFS_LANG_CODE)?>
 					<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('You can modify or set here your custom patters. Edit this ONLY if you know how to modify regular expression patterns! For Files fields types you can set here file extensions, separated by comma - ",".', CFS_LANG_CODE))?>"></i>

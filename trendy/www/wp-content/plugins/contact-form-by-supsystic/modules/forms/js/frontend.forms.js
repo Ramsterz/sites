@@ -19,8 +19,9 @@ var g_cfsFieldsAdapt = {
 			}
 		});
 	}
-,	time: function( $input ) {
-		$input.timepicker();
+,	time: function( $input, params ) {
+		params = params || {};
+		$input.timepicker( params );
 	}
 ,	_initDatePicker: function( $input, params ) {
 		params = params || {};
@@ -48,6 +49,8 @@ cfsForm.prototype.init = function() {
 	this._bindSubmit();
 	// Check cached pages nonce updates
 	this._checkNonceUpdate();
+	// Chech if we need show custom time pickers
+	this._checkTimePickers();
 	// Remember that we showed this form
 	this._setActionDone('show');
 	// Trigger standard jquery action
@@ -100,7 +103,7 @@ cfsForm.prototype.getFieldsBy = function(getByKey, getByValue) {
 	return res && res.length ? res : false;
 };
 cfsForm.prototype.getFieldInput = function( name ) {
-	return this._$.find('[name="fields['+ name+ ']"]');
+	return this._$.find('[name^="fields['+ name+ ']"]');
 };
 cfsForm.prototype._bindFieldsMatchValidation = function() {
 	var $bindToFields = this._$.find('[data-equal-to]');
@@ -123,7 +126,7 @@ cfsForm.prototype._bindFieldsMatchValidation = function() {
 };
 cfsForm.prototype._checkUpdateRecaptcha = function() {
 	var reCaptchFields = this.getFieldsByType('recaptcha');
-	if(reCaptchFields && reCaptchFields.length) {	// if reCapthca exists
+	if(reCaptchFields && reCaptchFields.length) {	// if reCaptcha exists
 		this._tryUpdateRecaptcha();
 	}
 };
@@ -138,6 +141,26 @@ cfsForm.prototype._bindHtml5Support = function() {
 			var $inputs = this._$.find('[type="'+ key+ '"]');
 			if($inputs && $inputs.size()) {
 				g_cfsFieldsAdapt[ key ]( $inputs );
+			}
+		}
+	}
+};
+cfsForm.prototype._checkTimePickers = function() {
+	var fields = this.getFields();
+	if( fields ) {
+		for(var i = 0; i < fields.length; i++) {
+			if(fields[ i ].html == 'time' 
+				&& fields[ i ].time_format 
+				&& fields[ i ].time_format != 'am_pm'
+			) {
+				var $input = this.getFieldInput( fields[ i ].name );
+				if($input && $input.size()) {
+					if( $input.hasClass() ) {	// Time input was inited
+						$input.timepicker('option', {timeFormat: 'H:i:s'});
+					} else {
+						$input.attr('type', 'text').timepicker({timeFormat: 'H:i'});
+					}
+				}
 			}
 		}
 	}
@@ -214,10 +237,10 @@ cfsForm.prototype._bindSubmit = function() {
 		,	onSuccess: function(res){
 				$form.find('input[type=submit]').removeAttr('disabled');
 				if(!res.error) {
-					var hideOnSubmit = self.getParam('tpl', 'hide_on_submit');
+					var hideOnSubmit = self.getParam('tpl', 'hide_on_submit')
+					,	$inPopup = $form.parents('.ppsPopupShell:first');
 					if(hideOnSubmit === false || parseInt(hideOnSubmit)) {
-						var $inPopup = $form.parents('.ppsPopupShell:first')
-						,	afterRemoveClb = false;
+						var afterRemoveClb = false;
 						// If form is in PopUp - let's relocate it correctly after form html will be removed
 						// so PopUp will be still in the center of the screen
 						if($inPopup && $inPopup.size()) {
@@ -248,6 +271,14 @@ cfsForm.prototype._bindSubmit = function() {
 						toeRedirect(res.data.redirect, parseInt(self._data.params.tpl.redirect_on_submit_new_wnd));
 					}
 					jQuery(document).trigger('cfsAfterFormSubmitSuccess', self);
+					if($inPopup && $inPopup.size()) {
+						if(typeof(ppsGetPopupByViewId) === 'function') {
+							jQuery(document).trigger('ppsAfterPopupsActionDone', {
+								popup: ppsGetPopupByViewId( $inPopup.data('view-id') )
+							,	action: 'contact'
+							});
+						}
+					}
 				} else {
 					self._setActionDone('submit_error', true);
 				}
@@ -307,6 +338,7 @@ cfsForm.prototype.refresh = function() {
 	this.getShell( true );
 	this._bindSubmit();
 	this._checkUpdateRecaptcha();
+	jQuery(document).trigger('cfsAfterFormInit', this);
 };
 cfsForm.prototype._checkNonceUpdate = function() {
 	if(_cfsCheckIsPageCached()) {

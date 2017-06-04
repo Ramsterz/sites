@@ -3,8 +3,8 @@ Contributors: OTWthemes
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CQH6CMTR42KS2
 Tags: separator, divider, shortcode, widgets, button, WYSIWYG editor, widget, sidebar
 Requires at least: 3.6
-Tested up to: 4.6.1
-Stable tag: 1.5
+Tested up to: 4.7.4
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,11 +13,6 @@ Create Separators / Dividers. Nice and easy interface. Insert anywhere in your s
 == Description ==
 
 Easily create all different kinds of Separators / Dividers for your WordPress site. Insert Separators / Dividers anywhere in your site - page/post editor, sidebars, template files. No coding is required. It is all done in a nice and easy interface.
-
-> Upgrade to the **Pro version** of this plugin - the fastes way to build your Wordpress based site including regular updates and premium support: 
-> [Content Manager](http://codecanyon.net/item/content-manager-for-wordpress/7431829?ref=OTWthemes&utm_source=wp.org&utm_medium=page&utm_content=upgrade&utm_campaign=cml) | [Demo site](http://otwthemes.com/demos/1ts/?item=Content%20Manager&utm_source=wp.org&utm_medium=page&utm_content=upgrade&utm_campaign=cml) 
-
-> Get some more awesome **FREE plugins**: <a href="https://wordpress.org/plugins/portfolio-manager-lite/" target="_blank">Portfolio Manager</a>, <a href="https://wordpress.org/plugins/widgetize-pages-light/" target="_blank">Widgetize Pages</a>, <a href="https://wordpress.org/plugins/blog-manager-light/" target="_blank">Blog Manager</a>
 
 **Separators / Dividers Options**
 
@@ -50,8 +45,8 @@ This plugin comes Localization/Internationalization ready. It is following WordP
 
 **Full version of the plugin**
 
-Upgrade to the full version of [Content Manager](http://codecanyon.net/item/content-manager-for-wordpress/7431829?ref=OTWthemes&utm_source=wp.org&utm_medium=page&utm_content=upgrade&utm_campaign=cml) |
-[Demo site](http://otwthemes.com/demos/1ts/?item=Content%20Manager&utm_source=wp.org&utm_medium=page&utm_content=upgrade&utm_campaign=cml)
+> Upgrade to the **Pro version** of this plugin - the fastes way to build your Wordpress based site including regular updates and premium support: 
+> [Content Manager](http://codecanyon.net/item/content-manager-for-wordpress/7431829?ref=OTWthemes&utm_source=wp.org&utm_medium=page&utm_content=upgrade&utm_campaign=cml) | [Demo site](http://otwthemes.com/demos/1ts/?item=Content%20Manager&utm_source=wp.org&utm_medium=page&utm_content=upgrade&utm_campaign=cml) 
 
 * Custom Responsive Layouts - Build in Seconds
 * Front-end Editor - Edit your layouts and content in the front-end of your site
@@ -84,6 +79,11 @@ Please refer to [online documentation page](http://otwthemes.com/online-document
 4. Front-end
 
 == Changelog ==
+
+= 1.6 =
+
+* Fixed: remove duplicate slashes
+* Updated: OTW Core functions updates
 
 = 1.5 =
 

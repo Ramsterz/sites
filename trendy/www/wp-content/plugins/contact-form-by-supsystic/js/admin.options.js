@@ -1,4 +1,5 @@
-var cfsAdminFormChanged = [];
+var cfsAdminFormChanged = []
+,	g_cfsDsblWndPromo = false;
 window.onbeforeunload = function(){
 	// If there are at lease one unsaved form - show message for confirnation for page leave
 	if(cfsAdminFormChanged.length)
@@ -464,35 +465,37 @@ function cfsInitMainPromoWnd() {
 		var $proOptWnd = cfsGetMainPromoWnd();
 		jQuery('.cfsProOpt').change(function(e){
 			e.stopPropagation();
-			var needShow = true
-			,	isRadio = jQuery(this).attr('type') == 'radio'
-			,	isCheck = jQuery(this).attr('type') == 'checkbox';
-			if(isRadio && !jQuery(this).attr('checked')) {
-				needShow = false;
-			}
-			if(!needShow) {
-				return;
-			}
-			if(isRadio) {
-				jQuery('input[name="'+ jQuery(this).attr('name')+ '"]:first').parents('label:first').click();
-				if(jQuery(this).parents('.iradio_minimal:first').size()) {
-					var self = this;
-					setTimeout(function(){
-						jQuery(self).parents('.iradio_minimal:first').removeClass('checked');
-					}, 10);
+			if( !g_cfsDsblWndPromo ) {
+				var needShow = true
+				,	isRadio = jQuery(this).attr('type') == 'radio'
+				,	isCheck = jQuery(this).attr('type') == 'checkbox';
+				if((isRadio || isCheck) && !jQuery(this).prop('checked')) {
+					needShow = false;
 				}
+				if(!needShow) {
+					return;
+				}
+				if(isRadio) {
+					jQuery('input[name="'+ jQuery(this).attr('name')+ '"]:first').parents('label:first').click();
+					if(jQuery(this).parents('.iradio_minimal:first').size()) {
+						var self = this;
+						setTimeout(function(){
+							jQuery(self).parents('.iradio_minimal:first').removeClass('checked');
+						}, 10);
+					}
+				}
+				var parent = null;
+				if(jQuery(this).parents('#cfsFormMainOpts').size()) {
+					parent = jQuery(this).parents('label:first');
+				} else if(jQuery(this).parents('.cfsFormOptRow:first').size()) {
+					parent = jQuery(this).parents('.cfsFormOptRow:first');
+				} else {
+					parent = jQuery(this).parents('tr:first');
+				}
+				if(!parent.size()) return;
+				cfsFillInMainPromoWnd(parent);
+				$proOptWnd.dialog('open');
 			}
-			var parent = null;
-			if(jQuery(this).parents('#cfsFormMainOpts').size()) {
-				parent = jQuery(this).parents('label:first');
-			} else if(jQuery(this).parents('.cfsFormOptRow:first').size()) {
-				parent = jQuery(this).parents('.cfsFormOptRow:first');
-			} else {
-				parent = jQuery(this).parents('tr:first');
-			}
-			if(!parent.size()) return;
-			cfsFillInMainPromoWnd(parent);
-			$proOptWnd.dialog('open');
 			return false;
 		});
 	}

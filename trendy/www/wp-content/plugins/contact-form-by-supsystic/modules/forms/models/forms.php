@@ -2,6 +2,8 @@
 class formsModelCfs extends modelCfs {
 	private $_linksReplacement = array();
 	private $_lastForm = null;
+	private $_lastSaveContactId = 0;
+	
 	public function __construct() {
 		$this->_setTbl('forms');
 	}
@@ -27,10 +29,32 @@ class formsModelCfs extends modelCfs {
 						}
 					}
 					if($this->sendContact($d['fields'], $form)) {
-						if(isset($form['params']['tpl']['save_contacts']) && $form['params']['tpl']['save_contacts']) {
-							$this->saveContact($d, $form);
+						// Publish here
+						if(isset($form['params']['tpl']['enb_publish']) 
+							&& $form['params']['tpl']['enb_publish']
+							&& frameCfs::_()->getModule('publish')
+						) {
+							$pubRes = frameCfs::_()->getModule('publish')->publish($d['fields'], $form);
+							if(!$pubRes) {
+								$this->pushError( frameCfs::_()->getModule('publish')->getErrors() );
+								return false;
+							}
 						}
-
+						// Registration
+						if(isset($form['params']['tpl']['enb_reg']) 
+							&& $form['params']['tpl']['enb_reg']
+							&& frameCfs::_()->getModule('publish')
+						) {
+							$regRes = frameCfs::_()->getModule('publish')->registrate($d['fields'], $form);
+							if(!$regRes) {
+								$this->pushError( frameCfs::_()->getModule('publish')->getErrors() );
+								return false;
+							}
+						}
+						dispatcherCfs::doAction('afterFormSuccessSubmit', $d['fields'], $form);
+						if(isset($form['params']['tpl']['save_contacts']) && $form['params']['tpl']['save_contacts']) {
+							$this->_lastSaveContactId = $this->saveContact($d, $form);
+						}
 						$this->_lastForm = $form;
 						return true;
 					}
@@ -40,6 +64,9 @@ class formsModelCfs extends modelCfs {
 		} else
 			$this->pushError(__('Empty Form ID', CFS_LANG_CODE));
 		return false;
+	}
+	public function getLastSavedContactId() {
+		return $this->_lastSaveContactId;
 	}
 	public function saveContact($d, $form) {
 		$saveData = array(
@@ -107,11 +134,14 @@ class formsModelCfs extends modelCfs {
 				$k = $f['name'];
 				$htmlType = $f['html'];
 				$isDate = in_array( $htmlType, array('date', 'month', 'week', 'time') );
-				$value = isset($fieldsData[ $k ]) ? trim($fieldsData[ $k ]) : false;
+				$value = isset($fieldsData[ $k ]) ? $fieldsData[ $k ] : false;
 				$label = isset($f['label']) && !empty($f['label']) ? $f['label'] : $f['placeholder'];
 				$formInvalidError = isset($form['params']['tpl']['field_error_invalid']) && !empty($form['params']['tpl']['field_error_invalid']) 
 					? trim($form['params']['tpl']['field_error_invalid']) 
 					: false;
+				if($value) {
+					$value = is_array($value) ? array_map('trim', $value) : trim( $value );
+				}
 				if(!empty($formInvalidError)) {
 					$formInvalidError = str_replace('[label]', '%s', $formInvalidError);
 				}
@@ -138,7 +168,7 @@ class formsModelCfs extends modelCfs {
 				}
 				if(empty($errorMsg)) {	// Start other validation process
 					if(!$isDate && isset($f['min_size']) && !empty($f['min_size']) && ($minSize = (int) $f['min_size'])) {
-						$isNumber = $value && is_numeric($value);
+						$isNumber = $htmlType == 'number' && $value && is_numeric($value);
 						if(($isNumber && $value < $minSize)
 							|| ((!$isNumber && $value && strlen($value) < $minSize) || !$value)
 						) {
@@ -146,7 +176,7 @@ class formsModelCfs extends modelCfs {
 						}
 					}
 					if(!$isDate && isset($f['max_size']) && !empty($f['max_size']) && ($maxSize = (int) $f['max_size'])) {
-						$isNumber = $value && is_numeric($value);
+						$isNumber = $htmlType == 'number' && $value && is_numeric($value);
 						if(($isNumber && $value > $maxSize)
 							|| (!$isNumber && $value && strlen($value) > $maxSize)
 						) {
@@ -200,6 +230,23 @@ class formsModelCfs extends modelCfs {
 		}
 		return true;
 	}
+	public function generateSendFormDataFull($fieldsData, $form) {
+		$blogName = wp_specialchars_decode(get_bloginfo('name'));
+		$siteUrl = get_bloginfo('wpurl');
+		$sendFormData = $this->_generateSendFormData( $fieldsData, $form );
+		$sendFormDataStr = $this->_generateFormDataStr( $sendFormData, $form );
+		$variables = array(
+			'sitename' => $blogName,
+			'siteurl' => $siteUrl,
+		);
+		foreach($form['params']['fields'] as $f) {
+			$sendName = $f['name'];
+			if(isset($sendFormData[ $sendName ])) {
+				$variables[ 'user_'. $sendName ] = $sendFormData[ $sendName ];
+			}
+		}
+		return nl2br(utilsCfs::replaceVariables($sendFormDataStr, array_merge($variables)));
+	}
 	public function sendContact($fieldsData, $form) {
 		if(isset($form['params']['submit']) && !empty($form['params']['submit'])) {
 			$blogName = wp_specialchars_decode(get_bloginfo('name'));
@@ -217,8 +264,10 @@ class formsModelCfs extends modelCfs {
 					$variables[ 'user_'. $sendName ] = $sendFormData[ $sendName ];
 				}
 			}
+			$sendForceTo = dispatcherCfs::applyFilters('sendContactTo', '', $fieldsData, $form);
 			foreach($form['params']['submit'] as $s) {
-				$to = trim($s['to']);
+				// We can re-modify this address in other parts of plugin, for example - in conditional logic for now
+				$to = empty($sendForceTo) ? trim($s['to']) : $sendForceTo;
 				if(empty($to)) continue;	// Any reasn to send to empty email
 				$msg = trim($s['msg']);
 				$additionalHeaders = array();
@@ -233,7 +282,8 @@ class formsModelCfs extends modelCfs {
 				}
 				$to = utilsCfs::replaceVariables($to, $variables);
 				$subject = utilsCfs::replaceVariables($s['subject'], $variables);
-				$msg = nl2br(utilsCfs::replaceVariables($msg, array_merge($variables, array('form_data' => $sendFormDataStr))));		// Let it be only for Message field
+				// Let it be only for Message field
+				$msg = nl2br(utilsCfs::replaceVariables($msg, array_merge($variables, array('form_data' => $sendFormDataStr))));
 				if(!frameCfs::_()->getModule('options')->get('disable_email_html_type')) {
 					$lang = function_exists('get_locale') ? get_locale() : false;
 					$isRtl = function_exists('is_rtl') ? is_rtl() : false;
@@ -324,6 +374,22 @@ class formsModelCfs extends modelCfs {
 	private function _generateFormDataStr( $sendFormData, $form ) {
 		$res = array();
 		$dsblSendLabels = isset($form['params']['tpl']['dsbl_send_labels']) && $form['params']['tpl']['dsbl_send_labels'];
+		$dsblHtmlEmail = frameCfs::_()->getModule('options')->get('disable_email_html_type');
+		$maxCols = 1;
+		$emailAsnForm = isset($form['params']['tpl']['email_form_data_as_tbl']) && $form['params']['tpl']['email_form_data_as_tbl'];
+		$resNamed = array();
+		if( !$dsblHtmlEmail && $emailAsnForm ) {
+			$totalMaxCols = 12;	// From Bootstrap
+			// Check if there are more then one column data
+			foreach($form['params']['fields'] as $f) {
+				if(isset($f['bs_class_id']) && $f['bs_class_id'] != $totalMaxCols) {
+					$currMaxCols = $totalMaxCols / (int) $f['bs_class_id'];
+					if( $currMaxCols > $maxCols ) {
+						$maxCols = $currMaxCols;
+					}
+				}
+			}
+		}
 		foreach($form['params']['fields'] as $f) {
 			$sendName = $f['name'];
 			if(isset($sendFormData[ $sendName ])) {
@@ -333,8 +399,43 @@ class formsModelCfs extends modelCfs {
 					$fieldRow .= '<b>'. $sendLabel. '</b>: ';
 				}
 				$fieldRow .= $sendFormData[ $sendName ];
-				$res[] = $fieldRow;
+				$res[] = $resNamed[ $sendName ] = $fieldRow;
 			}
+		}
+		if( !$dsblHtmlEmail && $maxCols > 1 && $emailAsnForm ) {
+			$resHtml = '<table cellspacing="0" cellpadding="0">';
+			$rows = array();
+			foreach($form['params']['fields'] as $f) {
+				$added = false;
+				$name = $f['name'];
+				if(isset( $resNamed[ $name ] )) {
+					$bsClassId = isset($f['bs_class_id']) && !empty($f['bs_class_id']) ? (int) $f['bs_class_id'] : 12;
+					if($bsClassId < 12) {	// Try to add it to prev. row
+						$prevRowI = count( $rows ) - 1;
+						if($prevRowI >= 0) {
+							if($rows[ $prevRowI ]['id'] < 12) {
+								$rows[ $prevRowI ]['id'] += $bsClassId;
+								$rows[ $prevRowI ]['cols'][] = $resNamed[ $name ];
+								$added = true;
+							}
+						}
+					}
+
+					if(!$added) {	// New row
+						$rows[] = array('id' => $bsClassId, 'cols' => array( $resNamed[ $name ] ));
+					}
+				}
+			}
+			foreach($rows as $r) {
+				$resHtml .= '<tr><td width="100%"><table width="100%" cellspacing="0" cellpadding="0"><tr>';
+				$colsWidth = 100 / count($r['cols']);
+				foreach($r['cols'] as $col) {
+					$resHtml .= '<td width="'. $colsWidth. '%">'. $col. '</td>';
+				}
+				$resHtml .= '</tr></table></td></tr>';
+			}
+			$resHtml .= '</table>';
+			return $resHtml;
 		}
 		return implode(CFS_EOL, $res);
 	}

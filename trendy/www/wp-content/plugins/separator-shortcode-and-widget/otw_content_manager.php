@@ -4,7 +4,7 @@ Plugin Name: Separator Shortcode And Widgets
 Plugin URI: http://OTWthemes.com
 Description:  Create Separators / Dividers. Nice and easy interface. Insert anywhere in your site - page/post editor, sidebars, template files.
 Author: OTWthemes.com
-Version: 1.5
+Version: 1.6
 
 Author URI: http://themeforest.net/user/OTWthemes
 */
@@ -28,6 +28,8 @@ $wp_spsw_cs_items = array(
 	'post'              => array( array(), __( 'Posts', 'otw_spsw' ) )
 );
 
+$otw_spsw_plugin_id = 'f4a932380e951d72cdf0a0955f55daa5';
+
 $otw_spsw_plugin_url = plugin_dir_url( __FILE__);
 $otw_spsw_css_version = '1.8';
 $otw_spsw_js_version = '1.8';
@@ -41,6 +43,9 @@ require_once( plugin_dir_path( __FILE__ ).'/include/otw_spsw_functions.php' );
 $otw_spsw_shortcode_component = false;
 $otw_spsw_form_component = false;
 $otw_spsw_validator_component = false;
+$otw_spsw_factory_component = false;
+$otw_spsw_factory_object = false;
+
 
 //load core component functions
 @include_once( 'include/otw_components/otw_functions/otw_functions.php' );
@@ -50,13 +55,16 @@ if( !function_exists( 'otw_register_component' ) ){
 }
 
 //register form component
-otw_register_component( 'otw_form', dirname( __FILE__ ).'/include/otw_components/otw_form/', $otw_spsw_plugin_url.'/include/otw_components/otw_form/' );
+otw_register_component( 'otw_form', dirname( __FILE__ ).'/include/otw_components/otw_form/', $otw_spsw_plugin_url.'include/otw_components/otw_form/' );
 
 //register validator component
-otw_register_component( 'otw_validator', dirname( __FILE__ ).'/include/otw_components/otw_validator/', $otw_spsw_plugin_url.'/include/otw_components/otw_validator/' );
+otw_register_component( 'otw_validator', dirname( __FILE__ ).'/include/otw_components/otw_validator/', $otw_spsw_plugin_url.'include/otw_components/otw_validator/' );
+
+//register factory component
+otw_register_component( 'otw_factory', dirname( __FILE__ ).'/include/otw_components/otw_factory/', $otw_spsw_plugin_url.'/include/otw_components/otw_factory/' );
 
 //register shortcode component
-otw_register_component( 'otw_shortcode', dirname( __FILE__ ).'/include/otw_components/otw_shortcode/', $otw_spsw_plugin_url.'/include/otw_components/otw_shortcode/' );
+otw_register_component( 'otw_shortcode', dirname( __FILE__ ).'/include/otw_components/otw_shortcode/', $otw_spsw_plugin_url.'include/otw_components/otw_shortcode/' );
 
 /** 
  *call init plugin function

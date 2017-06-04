@@ -1,15 +1,15 @@
 <?php
     /**
      * @package POWr About Us
-     * @version 1.4.001
+     * @version 1.6.3
      */
     /*
     Plugin Name: POWr About Us
-    Plugin URI: http://www.powr.io
-    Description: A professional profile section for your company or team.  Drop the widget anywhere in your theme. Or use the POWr icon in your WP text editor to add to a page or post. Edit on your live page by clicking the settings icon. More plugins and tutorials at POWr.io.
+    Plugin URI: https://www.powr.io/plugins/about-us
+    Description: Build visitor trust with a professional profile  Drop the widget anywhere in your theme. Or use the POWr icon in your WP text editor to add to a page or post. Edit on your live page by clicking the settings icon. More plugins and tutorials at POWr.io.
     Author: POWr.io
-    Version: 1.4.001
-    Author URI: http://www.powr.io
+    Version: 1.6.3
+    Author URI: https://www.powr.io
     */
 
     ///////////////////////////////////////GENERATE JS IN HEADER///////////////////////////////
@@ -64,36 +64,40 @@
     //////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////Create About Us widget/////////////////////////////////
     class Powr_About_Us extends WP_Widget{
+      public $plugin;
       //Create the widget
       public function __construct(){
         parent::__construct( 'powr_about_us',
                              __( 'POWr About Us' ),
                              array( 'description' => __( 'About Us by POWr.io') )
         );
+        
       }
       //This prints the div
       public function widget( $args, $instance ){
         $label = $instance['label'];
+        
         ?>
         <div class='widget powr-about-us' label='<?php echo $label; ?>'></div>
         <?php
       }
       public function update( $new_instance, $old_instance ){
-        //TODO: Figure out what needs to happen here
         $instance = $old_instance;
         //If no label, then set a label
         if( empty($instance['label']) ){
           $instance['label'] = 'wordpress_'.time();
         }
+        
         return $instance;
       }
       public function form( $instance ){
+        
         ?>
         <p>
-          No need to edit here - just click the gears icon on your About Us.
+          To edit, visit your live webpage and click the gears icon on your About Us.
         </p>
         <p>
-          Learn more at <a href='http://www.powr.io'>POWr.io</a>
+          Learn more at <a href='https://www.powr.io/knowledge-base'>POWr.io</a>
         </p>
         <?php
       }
@@ -146,49 +150,35 @@
     //ADD MENUS
     add_action( 'admin_menu', 'powr_about_us_menu' );
     function powr_about_us_menu() {
-      add_menu_page( 'POWr About Us', 'POWr About Us', 'manage_options', 'powr-about-us-settings', powr_about_us_options, 'https://s3-us-west-1.amazonaws.com/powr/platforms/wordpress/16x16_icons/AboutUs.png');
-      add_submenu_page( 'powr-about-us-settings', 'POWr - Create', 'Create', 'manage_options', 'powr-about-us-create', powr_about_us_create_options);
-      add_submenu_page( 'powr-about-us-settings', 'POWr - Manage', 'Manage', 'manage_options', 'powr-about-us-manage', powr_about_us_manage_options);
-      add_submenu_page( 'powr-about-us-settings', 'POWr - Help', 'Help', 'manage_options', 'powr-about-us-help', powr_about_us_help_options);
+      add_menu_page( 'POWr About Us', 'POWr About Us', 'manage_options', 'powr-about-us-settings', 'powr_about_us_options', plugins_url('/powr-icon.png',__FILE__));
     }
     function powr_about_us_options() {
       if ( !current_user_can( 'manage_options' ) )  {
         wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
       }
-      echo '<iframe id="powr-about-us" src="https://www.powr.io/wp/about-us" frameborder="0" width="100%" height="600px" style="position:absolute; top:0; left:0;z-index: 100;"></iframe>';
+      echo '<iframe id="powr-about-us" src="https://www.powr.io/wp-create/about-us" frameborder="0" width="100%" height="600px" style="position:absolute; top:0; left:0;z-index: 100;"></iframe>';
       echo '<script>';
-      echo 'var ht = window.innerHeight - document.getElementById("wpadminbar").offsetHeight;';
+      echo 'var ht = window.innerHeight; if(document.getElementById("wpadminbar")){ht -= document.getElementById("wpadminbar").offsetHeight;}';
       echo 'var iframe = document.getElementById("powr-about-us"); iframe.style.height = ht+"px"; iframe.height = ht;';
       echo '</script>';
     }
-    function powr_about_us_create_options() {
-      if ( !current_user_can( 'manage_options' ) )  {
-        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+    //Redirecting to landing page when plugin is activated
+    register_activation_hook(__FILE__, 'powr_about_us_plugin_activate');
+      add_action('admin_init', 'powr_about_us_plugin_redirect');
+
+      function powr_about_us_plugin_activate() {
+      add_option('powr_about_us_plugin_do_activation_redirect', true);
       }
-      echo '<iframe id="powr-create-about-us" src="https://www.powr.io/wp-create/about-us?powr_token='.get_option('powr_token').'" frameborder="0" width="100%" height="600px" style="position:absolute; top:0; left:0;z-index: 100;"></iframe>';
-      echo '<script>';
-      echo 'var ht = window.innerHeight - document.getElementById("wpadminbar").offsetHeight;';
-      echo 'var iframe = document.getElementById("powr-create-about-us"); iframe.style.height = ht+"px"; iframe.height = ht;';
-      echo '</script>';
-    }
-    function powr_about_us_manage_options() {
-      if ( !current_user_can( 'manage_options' ) )  {
-        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+
+      function powr_about_us_plugin_redirect() {
+      if (get_option('powr_about_us_plugin_do_activation_redirect', false)) {
+          delete_option('powr_about_us_plugin_do_activation_redirect');
+          if(!isset($_GET['activate-multi']))
+          {
+            wp_redirect( get_admin_url().'?platform=wordpress&page=powr-about-us-settings' );
+          }
+       }
       }
-      echo '<iframe id="powr-manage-about-us" src="https://www.powr.io/wp-manage/about-us" frameborder="0" width="100%" height="600px" style="position:absolute; top:0; left:0; z-index: 100;"></iframe>';
-      echo '<script>';
-      echo 'var ht = window.innerHeight - document.getElementById("wpadminbar").offsetHeight;';
-      echo 'var iframe = document.getElementById("powr-manage-about-us"); iframe.style.height = ht+"px"; iframe.height = ht;';
-      echo '</script>';
-    }
-    function powr_about_us_help_options() {
-      if ( !current_user_can( 'manage_options' ) )  {
-        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-      }
-      echo '<iframe id="powr-help-about-us" src="https://www.powr.io/knowledge-base?src=wordpress" frameborder="0" width="100%" height="600px" style="position:absolute; top:0; left:0; z-index: 100;"></iframe>';
-      echo '<script>';
-      echo 'var ht = window.innerHeight - document.getElementById("wpadminbar").offsetHeight;';
-      echo 'var iframe = document.getElementById("powr-help-about-us"); iframe.style.height = ht+"px"; iframe.height = ht;';
-      echo '</script>';
-    }
+
+
   ?>

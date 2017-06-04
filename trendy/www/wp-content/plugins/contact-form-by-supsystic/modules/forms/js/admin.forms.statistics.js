@@ -15,6 +15,7 @@ function cfsInitCharts() {
 	} else {
 		_cfsSwitchToNoStats('cfsMainStats');
 	}
+	jQuery(document).trigger('cfsAfterAdminStatsInit');
 }
 function _cfsSwitchToNoStats(chartId) {
 	jQuery('.cfsChartShell[data-chart="'+ chartId+ '"]').hide();

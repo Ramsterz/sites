@@ -1,26 +1,25 @@
-
-===POWr About Us===
+===About Us===
 Contributors: powr
 Donate link: https://www.powr.io/
-Tags: about us, about us plugin, company profile, employee profile, corporate profile, artist profile, profile, blogger profile, gallery site, profile widget, profile app, profile plugin, about us widget, branding, personal branding, Facebook, twitter, linkedin, instagram, tumblr, google plus, social media, responsive, responsive design, mobile, personalize, customize, optimize, custom, sidebar, drag and drop, WYSIWYG, POWr About Us
+Tags: about us, company profile, employee profile, corporate profile
 Requires at least: 3.0
-Tested up to: 4.5.1
-Stable tag: 1.5.2
+Tested up to: 4.74
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A professional profile section for your company or team.
+About Us is a professional profile creator. Add images, text and social links for team members or employees. Just paste the shortcode on your page.
 
 == Description ==
-[youtube https://www.youtube.com/watch?v=OdUHShj0NpA] A professional profile section for your company or team.
+[youtube https://www.youtube.com/watch?v=OdUHShj0NpA] Build visitor trust with a professional profile
 <br>
 <br>
-POWr About Us is a free cloud-based plugin you can edit in your live web page.  Create a POWr account to access the entire <a href='https://www.powr.io/plugins'>plugin library</a>.
+POWr About Us is a free cloud-based plugin you can edit in your live web page. Create a POWr account to access the entire <a href='https://www.powr.io/plugins'>plugin library</a>.
 <br>
 <br>
-First, download, install, and activate POWr About Us. Then drop the widget anywhere in your theme. Or add to a page/post with the POWr icon in the WP editor.
+First, download, install, and activate POWr About Us. Then drop the plugin anywhere in your theme. Or add to a page/post with the POWr icon in the WP editor.
 <br>
-= <a href='https://www.powr.io/tutorials/how-to-add-about-us-plugin-to-your-wordpress-site'>2 MINUTE INSTALL</a> =
+= <a href='https://www.powr.io/tutorials/how-to-add-about-us-plugin-to-your-wordpress-site'>Click Here for 2 Minute Install Tutorial</a> =
 <br>
 = Free Features =
 * Create profiles for employees, clients, products, companies, and more.
@@ -50,14 +49,14 @@ Mobile traffic matters. And successful sites need to be mobile responsive to kee
 Your WordPress website represents you, your brand, or your company. Own it, with fully customizable design. POWr About Us allows you to create your plugin precisely the way you'd like it. Select and adjust colors, background design, borders and edges, and lots more. Match the rest of your website perfectly, with no more coding confusion or pricey designer fees.
 <br>
 = CUSTOMER SUPPORT =
-It's a tough world out there, but you don't need to go it alone. POWr's customer support team is made up of top notch people, working hard to insure you get the help you need. Our full <a href='https://www.powr.io/knowledge-base'>Knowledge Base</a> is available 24/7. Additionally, there's great email support available any time, with live chat available during peak hours. We are here to help you!
+It's a tough world out there, but you don't need to go it alone. POWr's customer support team is made up of top notch people, working hard to insure you get the help you need. Our full <a href='https://www.powr.io/knowledge-base'>Help Center</a> is available 24/7. Additionally, there's great email support available any time, with live chat available during peak hours. We are here to help you!
 
 
 == Installation ==
 Download, install, and activate POWr About Us.
 <br>
 <br>
-Then drop the widget anywhere in your theme.
+Then drop the plugin anywhere in your theme.
 <br>
 <br>
 Or add to a page/post with the POWr Icon in the WP text editor.
@@ -65,25 +64,36 @@ Or add to a page/post with the POWr Icon in the WP text editor.
 <br>
 Then visit your site to and click the settings icon to edit right in the page.
 <br>
-= <a href='http://www.powr.io/tutorials/how-to-add-about-us-plugin-to-your-wordpress-site'>2 MINUTE INSTALL</a> =
+= <a href='https://www.powr.io/tutorials/how-to-add-about-us-plugin-to-your-wordpress-site'>Click Here for 2 Minute Install Tutorial</a> =
 
 
 
 == Frequently Asked Questions ==
 
-= Do I need to create a POWr Account? = Yes, you need a POWr Account.  Your account allows you to edit plugins right in your live webpage, and to recreate plugins across many different sites.
+= Do I need to create a POWr Account? =
+Yes, you need a POWr Account.  Your account allows you to create and save plugins, edit them in your live page, and use them on multiple different websites.
 
-= How do I add About Us to a page or blog post? = Add the shortcode **[powr-about-us label='Enter any label here']** to any page or post. Then visit your live site to edit.
+= How do I add About Us to a page or blog post? =
+Create and save the plugin in your WP Dashboard.  Then copy and paste the unique shortcode into any page or post. You can continue editing the plugin on your live page, in your WP Dashboard, or by logging in to www.powr.io.
 
-= Can I add more than one About Us? = Yes, absolutely!  To clone your About Us, just add the exact same shortcode to pages or posts.  To create a new version of About Us, add a different shortcode to each page or post, for example: **[powr-about-us label='first form']**, and **[powr-about-us label='second form']**.
+= How do I add About Us to a theme? =
+In your WP Dashboard, select Appearance > Widgets from the left sidebar. Find About Us under Available Widgets and drag it into a sidebar or footer.  Then visit the live page to set up the plugin.
 
-= Will my users see the settings icon in the corner of the About Us? = No! You only see the settings icon because you own the plugins. To temporarily hide it, click on your page and then type 'p + down arrow' (the letter p followed by the down arrow). You can show the icon again by typing 'p + up-arrow'.
+= Can I add more than one About Us? =
+Yes, absolutely!  To clone an existing About Us, paste the exact same unique shortcode into another page or post.  To create a new version, select About Us from the sidebar in your WP Dashboard and click Create New.  You can then edit and save a new version, and paste the new unique shortcode into a page or post.
 
-= I can't see the settings icon anymore, what happened? = You are just logged out of POWr.io. You can show the icon again by typing 'p + up-arrow'.
+= Will my users see the Edit button above About Us? =
+No! You only see the Edit button because you own the plugin. To temporarily hide it, click on your page and then type 'p + down arrow' (the letter p followed by the down arrow). You can show the icon again by typing 'p + up-arrow'.
 
-= Is POWr About Us Free? = Yes, the basic version of About Us is completely free!
+= I can't see the settings icon anymore, what happened? =
+You are just logged out of POWr.io. Visit <a href='https://www.powr.io'>www.powr.io</a> and log in to your account.  Then return to your website and refresh the page.
 
-= Why should I upgrade? = Upgrading gives you access to advanced features, removes all POWr watermarks, speeds up widget loading speed, gets you premium support, and supports the creation of more great plugins!
+= Is POWr About Us Free? =
+Yes, the basic version of About Us is completely free!
+
+= Why should I upgrade? =
+Upgrading gives you access to advanced features, removes the POWr logo, and gives you automatic priority support.
+
 
 
 == Screenshots ==
@@ -119,6 +129,15 @@ Fixed issue where POWr IDs get stripped
 = 1.5.2 =
 Bug fix for labels or IDs in shortcodes getting stripped
 
+= 1.6 =
+Easier to create and manage your POWr Plugins.
+
+= 1.6.2 =
+Bug Fixes (resolved some PHP notices seen by some users)
+
+= 1.6.3 =
+Supports latest plugins from POWr
+
 
 == Changelog ==
 = 1.0 =
@@ -146,4 +165,14 @@ Bug fix for labels or IDs in shortcodes getting stripped
 = 1.5.2 =
 * Bug fix for labels or IDs in shortcodes getting stripped
 
+= 1.6 =
+* Local icon assets
+* Improved install workflow
+* Updated plugin list
+
+= 1.6.2 =
+* Fixed PHP Notices about undefined constants
+
+= 1.6.3 =
+* TinyMCE supports latest POWr Plugins
 

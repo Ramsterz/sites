@@ -49,3 +49,9 @@
 	<?php _e('Total Statistics is empty for now.', CFS_LANG_CODE)?>
 	<p class="description"><?php _e('Once your site visitors begin to use your form - all form statistics usage will be here.', CFS_LANG_CODE)?></p>
 </div>
+<?php
+	if(isset($this->ratingStats)) {
+		echo $this->ratingStats;
+	} elseif(!$this->isPro) { ?>
+		<a target="_blank" href="<?php echo $this->mainLink. '?utm_source=plugin&utm_medium=conditional_logic&utm_campaign=forms';?>"><img src="<?php echo $this->promoModPath;?>rating-stats.png" style="width: 100%; height: auto;"/></a>
+	<?php } ?>

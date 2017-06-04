@@ -86,12 +86,16 @@ class optionsCfs extends moduleCfs {
 		$reqTab = reqCfs::getVar('tab');
 		return empty($reqTab) ? 'forms' : $reqTab;
 	}
-	public function getTabUrl($tab = '') {
+	public function getTabUrl($tab = '', $params = array()) {
 		static $mainUrl;
 		if(empty($mainUrl)) {
 			$mainUrl = frameCfs::_()->getModule('adminmenu')->getMainLink();
 		}
-		return empty($tab) ? $mainUrl : $mainUrl. '&tab='. $tab;
+		$url = empty($tab) ? $mainUrl : $mainUrl. '&tab='. $tab;
+		if(!empty($params)) {
+			$url .= '&'. http_build_query($params);
+		}
+		return $url;
 	}
 	public function getRolesList() {
 		if(!function_exists('get_editable_roles')) {

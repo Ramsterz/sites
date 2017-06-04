@@ -6,6 +6,7 @@ class formsCfs extends moduleCfs {
 	public function init() {
 		dispatcherCfs::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 		add_shortcode(CFS_SHORTCODE, array($this, 'showForm'));
+		add_shortcode(CFS_SHORTCODE_SUBMITTED, array($this, 'showFormSubmittedData'));
 		// Add to admin bar new item
 		add_action('admin_bar_menu', array($this, 'addAdminBarNewItem'), 300);
 	}
@@ -19,10 +20,17 @@ class formsCfs extends moduleCfs {
 		$tabs[ $this->getCode() ] = array(
 			'label' => __('Show All Forms', CFS_LANG_CODE), 'callback' => array($this, 'getTabContent'), 'fa_icon' => 'fa-list', 'sort_order' => 20, //'is_main' => true,
 		);
+		$tabs[ $this->getCode(). '_contacts' ] = array(
+			'label' => __('Contacts', CFS_LANG_CODE), 'callback' => array($this, 'getContactsTabContent'), 'fa_icon' => 'fa-users', 'sort_order' => 25, //'is_main' => true,
+		);
 		return $tabs;
 	}
 	public function getTabContent() {
 		return $this->getView()->getTabContent();
+	}
+	public function getContactsTabContent() {
+		$id = (int) reqCfs::getVar('id', 'get');
+		return $this->getView()->getContactsTabContent( $id );
 	}
 	public function getAddNewTabContent() {
 		return $this->getView()->getAddNewTabContent();
@@ -85,6 +93,7 @@ class formsCfs extends moduleCfs {
 				'url' => array('label' => __('URL', CFS_LANG_CODE), 'icon' => 'fa-link'),
 
 				'file' => array('label' => __('File Upload', CFS_LANG_CODE), 'icon' => 'fa-upload', 'pro' => ''),
+				'rating' => array('label' => __('Rating', CFS_LANG_CODE), 'icon' => 'fa-star', 'pro' => ''),
 				'recaptcha' => array('label' => __('reCaptcha', CFS_LANG_CODE), 'icon' => 'fa-unlock-alt'),
 				
 				'hidden' => array('label' => __('Hidden Field', CFS_LANG_CODE), 'icon' => 'fa-eye-slash'),
@@ -139,6 +148,24 @@ class formsCfs extends moduleCfs {
 				}
 			</style>';
 		return $stylesStr;
+	}
+	public function showFormSubmittedData() {
+		$fid = (int) reqCfs::getVar('fid');
+		$cid = (int) reqCfs::getVar('cid');
+		$hash = reqCfs::getVar('hash');
+		if($fid && $cid && $hash) {
+			if($hash == md5(AUTH_KEY. $fid. $cid)) {
+				$form = $this->getModel()->getById( $fid );
+				$contact = $this->getModel('contacts')->getById( $cid );
+				if($form && $contact) {
+					return $this->getModel()->generateSendFormDataFull($contact['fields'], $form);
+				}
+			}
+		}
+		return '';
+	}
+	public function getListAvailableTerms() {
+		return array('category', 'post_tag', 'products_categories', 'product_cat');
 	}
 }
 

@@ -163,7 +163,7 @@ class htmlCfs {
 		return self::_generateCheckList($name, $params, array('self', 'checkbox'), array('self', '_checkInArray'));
     }
 	static private function _checkInArray($checkIn, $key) {
-		return $checkIn && in_array($key, $checkIn);
+		return $checkIn && is_array($checkIn) && in_array($key, $checkIn);
 	}
 	static private function _checkEqual($checkIn, $key) {
 		return $checkIn !== false && $checkIn == $key;
@@ -749,8 +749,12 @@ class htmlCfs {
 					_custom_media = true;
 					wp.media.editor.send.attachment = function(props, attachment){
 						if ( _custom_media ) {
-							jQuery("#'. $inputId. '").val( attachment.url ).trigger("change");
-							'. ($onChange ? $onChange. '(attachment.url, attachment, "'. $buttonId. '");' : ''). '
+							var selectedUrl = attachment.url;
+							if(props && props.size && attachment.sizes && attachment.sizes[ props.size ] && attachment.sizes[ props.size ].url) {
+								selectedUrl =  attachment.sizes[ props.size ].url;
+							}
+							jQuery("#'. $inputId. '").val( selectedUrl ).trigger("change");
+							'. ($onChange ? $onChange. '(selectedUrl, attachment, "'. $buttonId. '");' : ''). '
 						} else {
 							return _orig_send_attachment.apply( this, [props, attachment] );
 						};

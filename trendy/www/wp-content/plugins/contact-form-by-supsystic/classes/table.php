@@ -343,7 +343,7 @@ abstract class tableCfs {
                     if(isset($this->_fields[$k]) && $this->_fields[$k]->adapt['dbTo']) 
                         $val = fieldAdapterCfs::_($val, $this->_fields[$k]->adapt['dbTo'], fieldAdapterCfs::DB);
                     if($validate) {
-                        if (is_object($this->_fields[$k])) {
+                        if (isset($this->_fields[$k]) && is_object($this->_fields[$k])) {
                             $objForValidation = clone $this->_fields[$k];
                             $objForValidation->setValue($val);
                             if($errors = validatorCfs::_($objForValidation)) {

@@ -89,6 +89,7 @@ class fileuploaderCfs {
 				);
 				$this->_file['id'] = frameCfs::_()->getTable('files')->insert($saveData);
 				$this->_file['hash'] = $saveData['hash'];
+				$this->_file['field_name'] = $saveData['field_name'];
 			}
 			$res = true;
 		} elseif($upload['error']) {

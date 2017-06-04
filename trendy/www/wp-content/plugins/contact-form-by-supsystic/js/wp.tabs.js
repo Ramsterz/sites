@@ -49,6 +49,7 @@
 					var allTabsContent = this._options.uniqId 
 						? $this.find('.cfsTabContent[data-tabs-for="'+ this._options.uniqId + '"]')
 						: $this.find('.cfsTabContent');
+						//console.log();
 					allTabsContent.hide();
 					$this.find(selector).show();
 					navigations.removeClass('nav-tab-active');

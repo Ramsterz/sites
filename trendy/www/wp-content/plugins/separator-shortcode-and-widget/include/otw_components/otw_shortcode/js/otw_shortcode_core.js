@@ -35,6 +35,23 @@ function otw_shortcode_tabs( selectors ){
 			jQuery( this ).parents( 'li' ).parent().parent().children(tab).show();
 		} );
 	};
+	
+	var preselected = window.location.hash;
+	if( preselected.length ){
+		
+		preselected = preselected.replace( /^#/, '' );
+		
+		var tab_links = preselected.split( '&' );
+		
+		for( var cT = 0; cT < tab_links.length; cT++ ){
+			
+			var link = jQuery( '.otw-sc-tabs [href=#' + tab_links[ cT ] + ']' );
+			
+			if( link.length ){
+				link.click();
+			};
+		};
+	};
 };
 function otw_shortcode_content_toggle( selector, closed ){
 

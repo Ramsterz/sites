@@ -1,8 +1,8 @@
-===  Contact Form by Supsystic ===
+﻿===  Contact Form by Supsystic ===
 Contributors: supsystic.com
 Tags: captcha, contact, contact form, contact form builder, contact form maker, contact form manager, contact form plugin, contact forms, contact us, custom form, feedback form, form, forms, forms creator, forms plugin, survey, quiz, subscription form, popup form
-Tested up to: 4.7
-Stable tag: 1.1.9
+Tested up to: 4.7.5
+Stable tag: 1.2.8
 
 Contact Form Builder with drag-and-drop editor to create responsive, mobile ready contact forms in a second. Custom fields and contact form templates
 
@@ -22,7 +22,7 @@ Main [Contact Form plugin](http://supsystic.com/plugins/contact-form-plugin/ "Co
 * Contact Form [A/B Testing](http://supsystic.com/ab-testing-contact-form "Form A/B Testing") 
 * Multi language support
 
-[youtube https://www.youtube.com/watch?v=T-ye7Ui-NGk]
+[youtube https://www.youtube.com/watch?v=8qi7NZiHjGc]
 
 Contact Form by Supsystic is an ultimate form builder WordPress plugin that lets you to create contact forms in seconds with ease. Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Capture more business opportunities on your website and get real time mobile notifications for new leads. Drag and Drop Contact Form Builder was made to create responsive, mobile ready contact forms in a second. Custom fields and contact form templates exists in our versoin. Simple and powerful Contact Form Builder by Supsystic with Drag-and-Drop editor does not require coding knowledges.
 
@@ -58,17 +58,21 @@ You have an incredible opportunity to get PRO version of the for free. Just Make
 
 == Frequently Asked Questions ==
 
+= Problems with sending messages via Contact Form =
+The Supsystic team has noticed there is sometimes a big trouble with our Contact Form plugin for WordPress sites. No matter that our plugin is effective in sending and receiving more then 1 million emails every day, when you personally didn’t get it or didn’t send it. 
+[The main causes, which can make you problem with plugin Contact Form by Supsystic](https://supsystic.com/contact-form-doesnt-send-messages/ "Problems with sending messages via Contact Form")
+
 = Can I add more fields or change fields in the Contact Form? =
-Yes, of course. The Contact Form by Supsystic allows you to add as much fields in the contact form as you need and have several types of them. E.g. 
-* Text – there you can create fields like Name or Subject, so any, where the user need to enter usual text in contact form
-* Email – a special form field fo emails only
-* Select Box and Select List – for any options you want to be chosen in the contact form
-* TextArea – where can be a free content of the contact form
-* Radiobutton/Radiobutton List – a multiple variants list with a circle type of contact form check mark
-* Checkbox/Checkbox List – a list of contact form options, where the user should confirm something or click the check mark
-* Country List/Country List Multiple – if you want your user to specify their country or several ones
-* Submit Button – by clicking it your user send you a contact form
-* Reset Button – if you want to give your user and ability to clear all the field by one click
+The Contact Form by Supsystic allows you to add as much fields in the contact form as you need and have several types of them. E.g. 
+ * Text – there you can create fields like Name or Subject, so any, where the user need to enter usual text in contact form
+ * Email – a special form field fo emails only
+ * Select Box and Select List – for any options you want to be chosen in the contact form
+ * TextArea – where can be a free content of the contact form
+ * Radiobutton/Radiobutton List – a multiple variants list with a circle type of contact form check mark
+ * Checkbox/Checkbox List – a list of contact form options, where the user should confirm something or click the check mark
+ * Country List/Country List Multiple – if you want your user to specify their country or several ones
+ * Submit Button – by clicking it your user send you a contact form
+ * Reset Button – if you want to give your user and ability to clear all the field by one click
 
 = Do you have any limitation in the number of forms, which can be filled in? =
 No, there is no such a number limit of contact form. You can receive as much cobtat forms as your customers fill in. Increase the level of your purchasing and be in touch with your customers. 
@@ -85,12 +89,12 @@ Contact Form WordPress plugin helps you easily to create contact forms with your
  
 = The Contact Form has its merits, as in =
 
-* Immediate operation after activation, no need for adding fields, boxes and lists configurations or shortcoding
-* Wide range of settings to configure the optin plugin and make it work for an iternal number of clients.
+ * Immediate operation after activation, no need for adding fields, boxes and lists configurations or shortcoding
+ * Wide range of settings to configure the optin plugin and make it work for an iternal number of clients.
 
 How to create/edit your Contact form?
-* Install the plugin by downloading the archive from supsystic.com, uploading it into your site and activating it.
-* Navigate to the insert “Add New form” and choose the Design option (e.g. Background color, width etc), Fields – all the fields you need for a full info from your client (including different kinds of lists, emails, texts fields etc), Submit options – customize the messages your clients get, after submitting forms, links etc.
+ * Install the plugin by downloading the archive from supsystic.com, uploading it into your site and activating it.
+ * Navigate to the insert “Add New form” and choose the Design option (e.g. Background color, width etc), Fields – all the fields you need for a full info from your client (including different kinds of lists, emails, texts fields etc), Submit options – customize the messages your clients get, after submitting forms, links etc.
 
 After all copy and paste the shortcode into your post or page and Contact Form will automatically creates on your page using the settings you chose above. Form the small line to a whole form in several seconds!
 
@@ -116,14 +120,93 @@ Using Contact Form plugin on your WordPress site you start a really responsive b
 
 == Changelog ==
 
-= 1.1.9 / 07.12.2016
+= 1.2.8 / 18.05.2017 =
+ * Additional compatibility with Google Maps Easy plugin https://wordpress.org/plugins/google-maps-easy/
+ * Code improvements
+
+= 1.2.7 / 04.05.2017 =
+ * Improved templates search
+ * Minor issues fix
+
+= 1.2.6 / 26.04.2017 =
+ * Select lists - small usability improvement
+ * Improved interactions with our users
+ * Fixed issues with possible incorrect non-utf8 characters
+ * Minor issues fix
+
+= 1.2.5 / 11.04.2017 =
+ * Compatibility with PopUp build-in Form and it's Close after Action option
+ * Minor issues fix
+ * Code improvements
+
+= 1.2.4 / 06.04.2017 =
+ * Fix issue with Date picker and it's navigation buttons
+ * Update Aweber Subscribe integration
+ * Fix possible conflicts with PopUp integration and Upload Field in Form
+ * Minor spelling issues fix. #106 add 0.05h
+ * Small fixes for Field Icons functionality
+ * Fix SendGrid to make it work with their updates API
+ * Fix possible collapsing of Preset select box in admin area
+ * Correct errors output for File type field
+ * Added possibility to select Time format for Time input field
+ * Fix issue with Required file upload field parameter
+
+= 1.2.3 / 23.03.2017 =
+ * Aweber API updated to latest version
+ * Aweber - fix conflict with other oAuth autentificators
+ * Improve Files input Field - added possibility to upload several files at one time
+ * Possibility to apply icons for submit buttons
+ * Core code improvements
+
+= 1.2.2 / 14.03.2017 =
+ * Style Form Email - like Form itself: fields in one row will be in one row - made it more pretty for you!
+ * Small fix for Access module
+ * Rating Field in Forms - possibility to set rating in your Forms - PRO
+ * Possibility to publish content (Posts, Pages, Products, etc.) from Form
+ * Possibility to Registrate users from Form
+ * Icons for Fields functionality - PRO
+ * Fix issue with "Merry Christmas" template
+ * Conditional Logic - possibility to send email to different addresses depending on fields selections
+ * Code review and improvements
+
+= 1.2.1 / 21.02.2017 =
+ * Featured plugins updated - added  Membership plugin
+ * Minor issues fixed
+
+= 1.2.0 / 16.02.2017 =
+ * Fix Merry Christmas template selectboxes text color
+ * Pixel and Custom conversion integration - PRO
+ * SendinBlue subscription service integration
+ * Possibility to show submitted Form data after user submit - to user
+ * Fix conflict with Vertical Response integration between PopUp and Contact Form plugins
+ * Core code improvements
+ * Possibility to select smaller images from WordPress Image Gallery
+ * Small fix for Fields Preset Values
+ * Contacts Tab - possibility to view all forms contacts from admin area
+ * Fixed snow url path, for multi-protocol
+ * Fix issue with validation array data
+ * Fix Min / Max Fields validation for non-numeric field types
+
+= 1.1.11 / 12.01.2017 =
+ * Small fix for Opacity Grey and Spearmint Contact Form Templates
+ * Fix PHP7-compatibility
+ * Fixed issue with exporting data to CSV with checkboxes or multiple lists
+ * Minor improvements
+
+= 1.1.10 / 19.12.2016 =
+ * Fix colorfield height
+ * Aweber subscription fix
+ * Admin area core code improvements
+ * Core code improvements and refactor
+
+= 1.1.9 / 07.12.2016 =
  * Label Delimiter Field parameter for field types Selectbox, Selectlist, Radiobuttons List, Checkbox List, Country List
  * Correct work with Cache plugins
  * Fix form DatePicker background transparency
  * Fix form elements, when they display as "in column"
  * Fix form templates "Ho Ho Ho" and "Merry Christmas"
 
-= 1.1.8 / 01.12.2016
+= 1.1.8 / 01.12.2016 =
  * Possibility to set Field value as Page URL and / or Page Title
  * Added new Template "Ho Ho Ho"
  * Added new Template "Merry Christmas"!

@@ -11,16 +11,14 @@ class dispatcherCfs {
         if(strpos($tag, 'cfs_') === false)
             $tag = self::$_pref. $tag;
         $numArgs = func_num_args();
-        if($numArgs > 2) {
-            $args = array();
+        if($numArgs > 1) {
+            $args = array( $tag );
             for($i = 1; $i < $numArgs; $i++) {
                 $args[] = func_get_arg($i);
             }
-        } elseif($numArgs == 2) {
-            $args = func_get_arg(1);
-        } else
-            $args = NULL;
-        return do_action($tag, $args);
+            return call_user_func_array('do_action', $args);
+        }
+        return do_action($tag);
     }
     static public function addFilter($tag, $function_to_add, $priority = 10, $accepted_args = 1) {
         if(strpos($tag, 'cfs_') === false)

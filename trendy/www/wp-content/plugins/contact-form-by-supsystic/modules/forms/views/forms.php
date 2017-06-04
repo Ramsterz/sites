@@ -167,13 +167,78 @@ class formsViewCfs extends viewCfs {
 		return 0;
 	}
 	public function getMainFormSubmitOptsTab() {
+		global $wpdb;
+		$postTypes = get_post_types('', 'objects');
+		$postTypesForSelect = array();
+		foreach($postTypes as $key => $value) {
+			if(!in_array($key, array('attachment', 'revision', 'nav_menu_item'))) {
+				$postTypesForSelect[$key] = $value->labels->name;
+			}
+		}
+		// We are not using wp methods here - as list can be very large - and it can take too much memory
+		$postTypesForCategoriesList = $this->getModule()->getListAvailableTerms();
+		$allCategories = dbCfs::get("SELECT t.term_id, t.name FROM $wpdb->terms t "
+			. "INNER JOIN $wpdb->term_taxonomy tt ON t.term_id = tt.term_id "
+			. "WHERE tt.taxonomy IN ('". implode("','", $postTypesForCategoriesList). "') ORDER BY t.name");
+		$allCategoriesForSelect = array();
+		if(!empty($allCategories)) {
+			foreach($allCategories as $c) {
+				$allCategoriesForSelect[ $c['term_id'] ] = $c['name'];
+			}
+		}
+		$this->assign('postTypesForSelect', $postTypesForSelect);
+		$this->assign('postStatusesForSelect', get_post_statuses());
+		$this->assign('allCategoriesForSelect', $allCategoriesForSelect);
+		$this->assign('allContactsListUrl', frameCfs::_()->getModule('options')->getTabUrl( $this->getCode(). '_contacts', array('id' => $this->form['id']) ));
+		$this->assign('regRolesForSelect', $this->getAvailableUserRolesForSelect());
+		$this->assign('submitOptsAddTabs', array(
+			'cfsFormSubmitEditTabPublish' => array(
+				'title' => __('Publish Content', CFS_LANG_CODE), 
+				'content' => $this->_getMainFormPublishContentTab(),
+				'fa_icon' => 'fa-thumb-tack',
+				'sort_order' => 0,
+			),
+			
+			'cfsFormSubmitEditTabRegistration' => array(
+				'title' => __('Registration', CFS_LANG_CODE), 
+				'content' => $this->_getMainFormRegistrationTab(),
+				'fa_icon' => 'fa-user-plus',
+				'sort_order' => 10,
+			),
+		));
 		return parent::getContent('formsEditFormSubmitOpts');
+	}
+	public function getAvailableUserRolesForSelect() {
+		global $wp_roles;
+		$res = array();
+		$allRoles = $wp_roles->roles;
+		$editableRoles = apply_filters('editable_roles', $allRoles);
+		
+		if(!empty($editableRoles)) {
+			foreach($editableRoles as $role => $data) {
+				if(in_array($role, array('administrator', 'editor'))) continue;
+				if($role == 'subscriber') {	// Subscriber - at the begining of array
+					$res = array($role => $data['name']) + $res;
+				} else {
+					$res[ $role ] = $data['name'];
+				}
+			}
+		}
+		return $res;
+	}
+	private function _getMainFormPublishContentTab() {
+		return parent::getContent('formsEditAdminPublishContentOpts');
+	}
+	private function _getMainFormRegistrationTab() {
+		return parent::getContent('formsEditAdminRegistrationOpts');
 	}
 	public function getMainFormTplTab() {
 		return parent::getContent('formsEditAdminTplOpts');
 	}
 	public function getMainFormFieldsTab() {
+		frameCfs::_()->getModule('templates')->loadBxSlider();
 		$isGoogleMapsAvailable = class_exists('frameGmp');
+		$mapId = reqCfs::getVar('map_id', 'get');
 		if($isGoogleMapsAvailable) {
 			$allGoogleMaps = frameGmp::_()->getModule('gmap')->getModel()->getAllMaps(array('simple' => true));
 			$allGoogleMapsForSelect = array();
@@ -185,6 +250,7 @@ class formsViewCfs extends viewCfs {
 			$this->assign('allGoogleMapsForSelect', $allGoogleMapsForSelect);
 		}
 		$this->assign('isGoogleMapsAvailable', $isGoogleMapsAvailable);
+		frameCfs::_()->addJSVar('admin.forms.fields', 'cfsAddMapField', $mapId);
 		return parent::getContent('formsEditFormFields');
 	}
 	public function getMainFormStatisticsOptsTab() {
@@ -199,6 +265,11 @@ class formsViewCfs extends viewCfs {
 		$stats = $statModel->getAllForFormSorted($this->form['id'], array('group' => $group));
 		if(!empty($stats)) {
 			frameCfs::_()->addJSVar('admin.forms.statistics', 'cfsAllStats', $stats);
+		}
+		if($this->isPro) {
+			if(frameCfs::_()->getModule('add_fields') && method_exists(frameCfs::_()->getModule('add_fields'), 'getRatingStatsTab')) {
+				$this->assign('ratingStats', frameCfs::_()->getModule('add_fields')->getRatingStatsTab( $this->form ));
+			}
 		}
 		return parent::getContent('formsEditFormStatistics');
 	}
@@ -231,7 +302,7 @@ class formsViewCfs extends viewCfs {
 			if($this->_saveLastForm) {
 				$this->_lastForm = $form;
 			}
-			return $this->generateHtml( $form );
+			return $this->generateHtml( $form, array('frontend' => true) );
 		}
 		return 'Can not find Form in database';
 	}
@@ -261,7 +332,8 @@ class formsViewCfs extends viewCfs {
 		$removeParamsKeys = array('sub_aweber_listname', 'sub_aweber_adtracking', 'sub_mailchimp_api_key', 'sub_mailchimp_lists', 'sub_ar_form_action',
 			'sub_sga_id', 'sub_sga_list_id', 'sub_sga_activate_code', 'sub_gr_api_key', 'sub_ac_api_url', 'sub_ac_api_key', 
 			'sub_ac_lists', 'sub_mr_lists', 'sub_gr_api_key', 'sub_gr_lists', 'cycle_day', 'sub_ic_app_id', 'sub_ic_app_user', 'sub_ic_app_pass', 'sub_ic_lists',
-			'sub_ck_api_key', 'sub_mem_acc_id', 'sub_mem_pud_key', 'sub_mem_priv_key', 'test_email');
+			'sub_ck_api_key', 'sub_mem_acc_id', 'sub_mem_pud_key', 'sub_mem_priv_key', 'test_email', 'sub_sb_api_key',
+			'sub_aw_c_key', 'sub_aw_c_secret');
 		foreach($removeParamsKeys as $unKey) {
 			if(isset($form[ $i ]['params']['tpl'][ $unKey ]))
 				unset($form[ $i ]['params']['tpl'][ $unKey ]);
@@ -274,6 +346,7 @@ class formsViewCfs extends viewCfs {
 				case 'date': case 'month': case 'week':
 					frameCfs::_()->getModule('templates')->loadDatePicker();
 					frameCfs::_()->getModule('templates')->loadJqueryUi();
+					frameCfs::_()->getModule('templates')->loadFontAwesome();
 					break;
 				case 'time':
 					frameCfs::_()->getModule('templates')->loadTimePicker();
@@ -281,69 +354,6 @@ class formsViewCfs extends viewCfs {
 			}
 		}
 	}
-	/*public function getMainFormSubTab() {
-		frameCfs::_()->getModule('subscribe')->loadAdminEditAssets();
-		//MailPoet check
-		$mailPoetAvailable = class_exists('WYSIJA');
-		if($mailPoetAvailable) {
-			$mailPoetLists = WYSIJA::get('list', 'model')->get(array('name', 'list_id'), array('is_enabled' => 1));
-			$mailPoetListsSelect = array();
-			if(!empty($mailPoetLists)) {
-				foreach($mailPoetLists as $l) {
-					$mailPoetListsSelect[ $l['list_id'] ] = $l['name'];
-				}
-			}
-			$this->assign('mailPoetListsSelect', $mailPoetListsSelect);
-		}
-		//Newsletter plugin check
-		// Unavailable for now
-		$newsletterAvailable = false;
-		if($newsletterAvailable) {
-
-		}
-		//Jetpack plugin check
-		$jetpackAvailable = class_exists('Jetpack');
-		$this->assign('availableUserRoles', frameCfs::_()->getModule('subscribe')->getAvailableUserRolesForSelect());
-		$this->assign('mailPoetAvailable', $mailPoetAvailable);
-		$this->assign('newsletterAvailable', $newsletterAvailable);
-		$this->assign('wpCsvExportUrl', uriCfs::mod('subscribe', 'getWpCsvList', array('id' => $this->forms['id'])));
-		$this->assign('jetpackAvailable', $jetpackAvailable);
-		return parent::getContent('formsEditAdminSubOpts');
-	}
-	public function getMainFormSmTab() {
-		$sssPlugAvailable = class_exists('SupsysticSocialSharing');
-		global $supsysticSocialSharing;
-		if($sssPlugAvailable && isset($supsysticSocialSharing) && method_exists($supsysticSocialSharing, 'getEnvironment')) {
-			$sssProjects = $supsysticSocialSharing->getEnvironment()->getModule('Projects')->getController()->getModelsFactory()->get('projects')->all();
-			if(empty($sssProjects)) {
-				$this->assign('addProjectUrl', $supsysticSocialSharing->getEnvironment()->generateUrl('projects'). '#add');
-			} else {
-				$sssProjectsForSelect = array(0 => __('None - use Standard Form Social Buttons'));
-				$formsIdFound = false;
-				foreach($sssProjects as $p) {
-					$sssProjectsForSelect[ $p->id ] = $p->title;
-					if(isset($p->settings) 
-						&& isset($p->settings['forms_id']) 
-						&& $p->settings['forms_id'] == $this->forms['id']
-					) {
-						if(!isset($this->forms['params']['tpl']['use_sss_prj_id'])) {
-							$this->forms['params']['tpl']['use_sss_prj_id'] = $p->id;
-						}
-						$formsIdFound = true;
-					}
-				}
-				if(!$formsIdFound 
-					&& isset($this->forms['params']['tpl']['use_sss_prj_id']) 
-					&& !empty($this->forms['params']['tpl']['use_sss_prj_id'])
-				) {
-					$this->forms['params']['tpl']['use_sss_prj_id'] = 0;
-				}
-			}
-			$this->assign('sssProjectsForSelect', $sssProjectsForSelect);
-		}
-		$this->assign('sssPlugAvailable', $sssPlugAvailable);
-		return parent::getContent('formsEditAdminSmOpts');
-	}*/
 	public function getMainFormCodeTab() {
 		return parent::getContent('formsEditAdminCodeOpts');
 	}
@@ -395,8 +405,8 @@ class formsViewCfs extends viewCfs {
 		
 		$form['html'] .= $this->_generateImgsPreload( $form );
 		
-		$form['css'] = dispatcherCfs::applyFilters('formCss', $form['css'], $form);
-		$form['html'] = dispatcherCfs::applyFilters('formHtml', $form['html'], $form);
+		$form['css'] = dispatcherCfs::applyFilters('formCss', $form['css'], $form, $params);
+		$form['html'] = dispatcherCfs::applyFilters('formHtml', $form['html'], $form, $params);
 		// $replaceStyleTag can be used for compability with other plugins minify functionality: 
 		// it will not recognize css in js data as style whye rendering on server side, 
 		// but will be replaced back to normal <style> tag in JS, @see js/frontend.forms.js
@@ -476,7 +486,7 @@ class formsViewCfs extends viewCfs {
 					$fieldListSupported = $mod->isFieldListSupported($htmlType);
 					// Additional html types, that does not have options selection, but will be displayed in same way as other lists
 					$showAsList = $fieldListSupported || in_array($htmlType, array('countryList', 'countryListMultiple'));
-					$showAsOneCheck = in_array($htmlType, array('checkbox', 'radiobutton'));
+					$showAsOneCheck = in_array($htmlType, array('checkbox', 'radiobutton', 'checkboxsubscribe'));
 					$isButton = in_array($htmlType, array('submit', 'reset', 'button'));
 					$isRadioCheckList = in_array($htmlType, array('radiobuttons', 'checkboxlist'));
 					if($fieldListSupported && isset($f['options']) && !empty($f['options'])) {
@@ -555,10 +565,11 @@ class formsViewCfs extends viewCfs {
 					// Generate input field itself
 					if($fieldTypeData && isset($fieldTypeData['pro'])) {
 						if(!$addFieldsMod) continue;
-						$inputHtml = $addFieldsMod->generateFieldHtml($htmlType, $fullName, $htmlParams, $form);
+						$inputHtml = $addFieldsMod->generateFieldHtml($htmlType, $fullName, $htmlParams, $form, $f);
 					} else {
 						$inputHtml = htmlCfs::$htmlType($fullName, $htmlParams);
 					}
+					$inputHtml = dispatcherCfs::applyFilters('formInputHtml', $inputHtml, $f, $htmlParams);
 					// Generate it's html shell wrapper
 					if(!$isHidden) {
 						$insertLabelInternal = strpos($fieldWrapper, '[label]') === false;
@@ -591,7 +602,7 @@ class formsViewCfs extends viewCfs {
 				$bsClassId = isset($f['bs_class_id']) && !empty($f['bs_class_id']) ? (int) $f['bs_class_id'] : 12;
 				$added = false;
 				if(!$isHidden) {
-					$inputHtml = '<div class="col-sm-'. $bsClassId. ' cfsFieldCol" data-name="'. $name. '">'. $inputHtml. '</div>';	// Bootstrap col wrapper
+					$inputHtml = '<div class="col-sm-'. $bsClassId. ' cfsFieldCol" data-name="'. $name. '" data-type="'. $htmlType. '">'. $inputHtml. '</div>';	// Bootstrap col wrapper
 					if($bsClassId < 12) {	// Try to add it to prev. row
 						$prevRowI = count( $rows ) - 1;
 						if($prevRowI >= 0) {
@@ -614,7 +625,6 @@ class formsViewCfs extends viewCfs {
 				} else {
 					$resHtml .= '<div class="row cfsFieldsRow">'. $cols. '</div>';
 				}
-				
 			}
 		}
 		return $resHtml;
@@ -691,8 +701,44 @@ class formsViewCfs extends viewCfs {
 				)
 			);
 			$this->_twig->addFunction(
-				new Twig_SimpleFunction('hex_to_rgba_str', 'utilsPps::hexToRgbaStr')
+				new Twig_SimpleFunction('hex_to_rgba_str', 'utilsCfs::hexToRgbaStr')
 			);
 		}
+	}
+	public function getContactsTabContent( $fid = 0 ) {
+		frameCfs::_()->getModule('templates')->loadJqGrid();
+		frameCfs::_()->getModule('templates')->loadBootstrapPartialOnlyCss();
+		frameCfs::_()->addScript('admin.forms', $this->getModule()->getModPath(). 'js/admin.forms.js');
+		frameCfs::_()->addScript('admin.forms.contacts.list', $this->getModule()->getModPath(). 'js/admin.forms.contacts.list.js');
+		frameCfs::_()->addJSVar('admin.forms.contacts.list', 'cfsTblDataUrl', uriCfs::mod('forms', 'getContactsListForTbl', array('reqType' => 'ajax', 'fid' => $fid)));
+		
+		$allForms = $this->getModel()->getFromTbl();
+		$allFormsForSelect = array();
+		$formsFields = array();
+		if(!empty($allForms)) {
+			$allFormsForSelect[ 0 ] = __('All', CFS_LANG_CODE);
+			foreach($allForms as $form) {
+				$allFormsForSelect[ $form['id'] ] = $form['label'];
+				if(isset($form['params']['fields']) && !empty($form['params']['fields'])) {
+					if(count( $formsFields ) < 5) {	// More fields will look like very unpreatty
+						foreach($form['params']['fields'] as $f) {
+							$htmlType = $f['html'];
+							if(in_array($htmlType, array('submit', 'reset', 'button', 'recaptcha', 'htmldelim',
+								'googlemap', 'textarea', 'selectlist', 'radiobutton', 'radiobuttons', 'checkbox',
+								'checkboxlist', 'checkboxsubscribe', 'countryList', 'countryListMultiple'))) continue;
+							$sendName = $f['name'];
+							if(empty($sendName)) continue;
+							$formsFields[ $sendName ] = $f['label'] ? $f['label'] : $f['placeholder'];
+						}
+					}
+				}
+			}
+		}
+		frameCfs::_()->addJSVar('admin.forms.contacts.list', 'cfsFormFields', $formsFields);
+		
+		$this->assign('addNewLink', frameCfs::_()->getModule('options')->getTabUrl('forms_add_new'));
+		$this->assign('allFormsForSelect', $allFormsForSelect);
+		$this->assign('fid', $fid);
+		return parent::getContent('formsContacts');
 	}
 }

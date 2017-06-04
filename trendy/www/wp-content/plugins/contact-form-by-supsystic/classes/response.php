@@ -22,7 +22,7 @@ class responseCfs {
         if(count($this->errors) > 0)
             $this->error = true;
         if($isAjax || $forceAjax)
-            exit( json_encode($this) );
+            exit( json_encode_utf_normal($this) );
         /*if($redirect)
             redirectCfs($redirect);*/
         return $this;
@@ -73,7 +73,7 @@ class responseCfs {
         $this->html = $html;
     }
     public function addData($data, $value = NULL) {
-         if(empty($data)) return;
+		if(empty($data)) return;
 		if($this->_ignoreShellData) {
 			if(!is_array($data))
 				$data = array($data => $value);

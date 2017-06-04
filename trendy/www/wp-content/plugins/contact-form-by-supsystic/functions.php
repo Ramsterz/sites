@@ -243,7 +243,7 @@ if(!function_exists('prepareFieldCodeCfs')) {
 	function prepareFieldCodeCfs($string) {   
 		$string = preg_replace("/[^a-zA-Z0-9\s]/"," ",$string);
 		$string = preg_replace("/\s+/", " ", $string);
-		$string = ereg_replace(' ','',$string);
+		$string = preg_replace('/ /','',$string);
 
 		$code = substr($string, 0, 8);
 		$code = strtolower($code);

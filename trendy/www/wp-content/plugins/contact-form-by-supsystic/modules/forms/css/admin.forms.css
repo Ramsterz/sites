@@ -473,7 +473,7 @@ a.cfsSwitchShowHideOptLink:hover {
 .cfsSaveFormErrorEx {
 	display: none;
 }
-#cfsFieldsEditWnd, #cfsFieldsEditWnd * {
+#cfsFieldsEditWnd, #cfsFieldsEditWnd *:not(.iris-picker) {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing:    border-box;
 	box-sizing:         border-box;
@@ -498,4 +498,23 @@ a.cfsSwitchShowHideOptLink:hover {
 }
 .cfsFormWhereShowBlock {
 	display: none;
+}
+#cfsFormContactFieldRowEx {
+	display: none;
+}
+.cfsFieldIconBtn {
+	color: #000;
+}
+.cfsFieldIconBtn:hover,
+.cfsFieldIconBtn.active {
+	color: #4ae8ea;
+}
+#cfsSubmitOpts {
+	padding-top: 0;
+}
+#cfsSubmitOpts .nav-tab-wrapper {
+	padding-top: 0;
+}
+.cfsFieldFixedSelectRow .chosen-container {
+	min-width: 163px !important;
 }

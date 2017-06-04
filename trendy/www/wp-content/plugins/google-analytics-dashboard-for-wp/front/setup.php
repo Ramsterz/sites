@@ -57,7 +57,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 
 				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 
-				wp_enqueue_script( 'gadwp-frontend-item-reports', GADWP_URL . 'common/js/reports.js', array( 'gadwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION, true );
+				wp_enqueue_script( 'gadwp-frontend-item-reports', GADWP_URL . 'common/js/reports5.js', array( 'gadwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION, true );
 
 				/* @formatter:off */
 				wp_localize_script( 'gadwp-frontend-item-reports', 'gadwpItemData', array(
@@ -74,7 +74,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
 					),
 					'reportList' => array(
-						'sessions' => __( "Sessions", 'google-analytics-dashboard-for-wp' ),
+						'uniquePageviews' => __( "Unique Views", 'google-analytics-dashboard-for-wp' ),
 						'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
 						'organicSearches' => __( "Organic", 'google-analytics-dashboard-for-wp' ),
 						'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
@@ -91,7 +91,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 							__( "Visitor Type", 'google-analytics-dashboard-for-wp' ),
 							__( "Search Engines", 'google-analytics-dashboard-for-wp' ),
 							__( "Social Networks", 'google-analytics-dashboard-for-wp' ),
-							__( "Sessions", 'google-analytics-dashboard-for-wp' ),
+							__( "Unique Views", 'google-analytics-dashboard-for-wp' ),
 							__( "Users", 'google-analytics-dashboard-for-wp' ),
 							__( "Page Views", 'google-analytics-dashboard-for-wp' ),
 							__( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
@@ -106,6 +106,16 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 							__( "Operating System", 'google-analytics-dashboard-for-wp' ),
 							__( "Screen Resolution", 'google-analytics-dashboard-for-wp' ),
 							__( "Mobile Brand", 'google-analytics-dashboard-for-wp' ),
+							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
+							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
+							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
+							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
+							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
+							__( "Future Use", 'google-analytics-dashboard-for-wp' ), //25
+							__( "Time on Page", 'google-analytics-dashboard-for-wp' ),
+							__( "Page Load Time", 'google-analytics-dashboard-for-wp' ),
+							__( "Exit Rate", 'google-analytics-dashboard-for-wp' ),
+							__( "Precision: ", 'google-analytics-dashboard-for-wp' ), //29
 					),
 					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 					'region' => $region,

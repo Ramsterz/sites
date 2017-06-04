@@ -59,12 +59,12 @@ class optionsViewCfs extends viewCfs {
 		return parent::getContent('optionsAdminMain');
 	}
 	public function serverSettings() {
+		global $wpdb;
 		$this->assign('systemInfo', array(
             'Operating System' => array('value' => PHP_OS),
             'PHP Version' => array('value' => PHP_VERSION),
             'Server Software' => array('value' => $_SERVER['SERVER_SOFTWARE']),
-            'MySQL' => array('value' => function_exists('mysql_get_server_info') ? @mysql_get_server_info() : __('Undefined', CFS_LANG_CODE)),
-            'PHP Safe Mode' => array('value' => ini_get('safe_mode') ? 'Yes' : 'No', 'error' => ini_get('safe_mode')),
+            'MySQL' => array('value' => $wpdb->db_version()),
             'PHP Allow URL Fopen' => array('value' => ini_get('allow_url_fopen') ? 'Yes' : 'No'),
             'PHP Memory Limit' => array('value' => ini_get('memory_limit')),
             'PHP Max Post Size' => array('value' => ini_get('post_max_size')),

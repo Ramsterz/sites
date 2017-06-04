@@ -25,8 +25,11 @@ jQuery(document).ready(function(){
 			jQuery(document).trigger( tabChangeEvt, selector );
 		}
 	});
+	jQuery('#cfsFormSubmitEditTabs').wpTabs({
+		uniqId: 'cfsFormSubmitEditTabs'
+	});
 	jQuery('.cfsFormSaveBtn').click(function(){
-		jQuery('#cfsFormEditForm').submit();
+		cfsSaveForm();
 		return false;
 	});
 	
@@ -326,7 +329,7 @@ jQuery(document).ready(function(){
 	jQuery('#cfsFormEditForm input[type=text]').keypress(function(e){
 		if (e.which == 13) {
 			e.preventDefault();
-			jQuery('#cfsFormEditForm').submit();
+			cfsSaveForm();
 		}
 	});
 });
@@ -552,4 +555,7 @@ function cfsFormCheckSwitchActiveBtn() {
 		jQuery('.cfsFormSwitchActive .fa').removeClass('fa-toggle-off').addClass('fa-toggle-on');
 		jQuery('.cfsFormSwitchActive span').html( jQuery('.cfsFormSwitchActive').data('txt-on') );	
 	}
+}
+function cfsSaveForm() {
+	jQuery('#cfsFormEditForm').submit();
 }

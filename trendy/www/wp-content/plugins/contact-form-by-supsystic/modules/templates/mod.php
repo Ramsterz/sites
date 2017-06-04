@@ -140,7 +140,11 @@ class templatesCfs extends moduleCfs {
 		}
 	}
 	public function loadFontAwesome() {
-		frameCfs::_()->addStyle('font-awesomeCfs', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+		static $loaded = false;
+		if(!$loaded) {
+			frameCfs::_()->addStyle('font-awesomeCfs', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+			$loaded = true;
+		}
 	}
 	public function loadChosenSelects() {
 		frameCfs::_()->addStyle('jquery.chosen', $this->_cdnUrl. 'lib/chosen/chosen.min.css');
@@ -247,6 +251,14 @@ class templatesCfs extends moduleCfs {
 		if(!isset($loaded[ $font ])) {
 			frameCfs::_()->addStyle('google.font.'. str_replace(array(' '), '-', $font), 'https://fonts.googleapis.com/css?family='. urlencode($font));
 			$loaded[ $font ] = 1;
+		}
+	}
+	public function loadBxSlider() {
+		static $loaded = false;
+		if(!$loaded) {
+			frameCfs::_()->addStyle('bx-slider', CFS_JS_PATH. 'bx-slider/jquery.bxslider.css');
+			frameCfs::_()->addScript('bx-slider', CFS_JS_PATH. 'bx-slider/jquery.bxslider.min.js');
+			$loaded = true;
 		}
 	}
 }

@@ -96,6 +96,10 @@ class statisticsModelCfs extends modelCfs {
 		switch($chartId) {
 			case 'cfsMainStats':
 				return $this->getAllForFormSorted($id, array('group' => $group));
+			case 'cfsRatingStats':
+				return frameCfs::_()->getModule('add_fields') && frameCfs::_()->getModule('add_fields')->getModel('rating')
+					? frameCfs::_()->getModule('add_fields')->getModel('rating')->getStatsForFormSorted($id, array('group' => $group))
+					: array();
 		}
 		return false;
 	}

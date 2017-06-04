@@ -1,6 +1,8 @@
 <?php
 class formsControllerCfs extends controllerCfs {
 	private $_prevFormId = 0;
+	private $_forceModelName = '';
+	
 	public function createFromTpl() {
 		$res = new responseCfs();
 		if(($id = $this->getModel()->createFromTpl(reqCfs::get('post'))) != false) {
@@ -12,20 +14,45 @@ class formsControllerCfs extends controllerCfs {
 	}
 	protected function _prepareListForTbl($data) {
 		if(!empty($data)) {
-			foreach($data as $i => $v) {
-				$data[ $i ]['label'] = '<a class="" href="'. $this->getModule()->getEditLink($data[ $i ]['id']). '">'. $data[ $i ]['label']. '&nbsp;<i class="fa fa-fw fa-pencil" style="margin-top: 2px;"></i></a>';
-				$conversion = 0;
-				if(!empty($data[ $i ]['unique_views']) && !empty($data[ $i ]['actions'])) {
-					$conversion = number_format( ((int) $data[ $i ]['actions'] / (int) $data[ $i ]['unique_views']), 3);
+			if($this->_forceModelName == 'contacts') {
+				foreach($data as $i => $v) {
+					$viewLinkSet = false;
+					if(isset($data[ $i ]['fields']) && !empty($data[ $i ]['fields'])) {
+						foreach($data[ $i ]['fields'] as $fK => $fV) {
+							$fieldVal = $fV;
+							if(!empty($fieldVal) && is_array($fieldVal)) {
+								$fieldVal = implode(', ', $fieldVal);
+							}
+							if(!empty($fieldVal) && !$viewLinkSet) {
+								$data[ $i ][ 'user_field_'. $fK ] = '<a href="'. $data[ $i ]['id']. '" class="cfsFormContactPrevLnk">'. $fieldVal. '&nbsp;<i class="fa fa-search"></i></a>';
+								$viewLinkSet = true;
+							} else {
+								$data[ $i ][ 'user_field_'. $fK ] = $fieldVal;
+							}
+						}
+						unset( $data[ $i ]['fields'] );
+					}
 				}
-				$data[ $i ]['conversion'] = $conversion;
-				$data[ $i ]['active'] = $data[ $i ]['active'] ? '<span class="alert alert-success">'. __('Yes', CFS_LANG_CODE). '</span>' : '<span class="alert alert-danger">'. __('No', CFS_LANG_CODE). '</span>';
+			} else {
+				foreach($data as $i => $v) {
+					$data[ $i ]['label'] = '<a class="" href="'. $this->getModule()->getEditLink($data[ $i ]['id']). '">'. $data[ $i ]['label']. '&nbsp;<i class="fa fa-fw fa-pencil" style="margin-top: 2px;"></i></a>';
+					$conversion = 0;
+					if(!empty($data[ $i ]['unique_views']) && !empty($data[ $i ]['actions'])) {
+						$conversion = number_format( ((int) $data[ $i ]['actions'] / (int) $data[ $i ]['unique_views']), 3);
+					}
+					$data[ $i ]['conversion'] = $conversion;
+					$data[ $i ]['active'] = $data[ $i ]['active'] ? '<span class="alert alert-success">'. __('Yes', CFS_LANG_CODE). '</span>' : '<span class="alert alert-danger">'. __('No', CFS_LANG_CODE). '</span>';
+				}
 			}
 		}
 		return $data;
 	}
 	protected function _prepareTextLikeSearch($val) {
-		$query = '(label LIKE "%'. $val. '%"';
+		if($this->_forceModelName == 'contacts') {
+			$query = '(ip LIKE "%'. $val. '%" OR url LIKE "%'. $val. '%"';
+		} else {
+			$query = '(label LIKE "%'. $val. '%"';
+		}
 		if(is_numeric($val)) {
 			$query .= ' OR id LIKE "%'. (int) $val. '%"';
 		}
@@ -33,20 +60,24 @@ class formsControllerCfs extends controllerCfs {
 		return $query;
 	}
 	protected function _prepareModelBeforeListSelect($model) {
-		$where = 'original_id != 0';
-		$abTestCondAdded = false;
-		if(frameCfs::_()->getModule('ab_testing')) {
-			$abBaseId = frameCfs::_()->getModule('ab_testing')->getListForBaseId();
-			if(!empty($abBaseId)) {
-				$where .= ' AND ab_id = '. $abBaseId;
-				$abTestCondAdded = true;
+		if($this->_forceModelName == 'contacts') {
+			
+		} else {
+			$where = 'original_id != 0';
+			$abTestCondAdded = false;
+			if(frameCfs::_()->getModule('ab_testing')) {
+				$abBaseId = frameCfs::_()->getModule('ab_testing')->getListForBaseId();
+				if(!empty($abBaseId)) {
+					$where .= ' AND ab_id = '. $abBaseId;
+					$abTestCondAdded = true;
+				}
 			}
+			if(!$abTestCondAdded) {
+				$where .= ' AND ab_id = 0';
+			}
+			$model->addWhere( $where );
+			dispatcherCfs::doAction('formsModelBeforeGetList', $model);
 		}
-		if(!$abTestCondAdded) {
-			$where .= ' AND ab_id = 0';
-		}
-		$model->addWhere( $where );
-		dispatcherCfs::doAction('formsModelBeforeGetList', $model);
 		return $model;
 	}
 	protected function _prepareSortOrder($sortOrder) {
@@ -96,10 +127,8 @@ class formsControllerCfs extends controllerCfs {
 				}
 				</style>'
 			. '</head>';
-			//wp_head();
 			echo '<body>';
 			echo $formContent;
-			//wp_footer();
 			echo '<body></html>';
 		}
 		exit();
@@ -198,6 +227,7 @@ class formsControllerCfs extends controllerCfs {
 		exit();
 	}
 	private function _makeExportQueriesLogicForPro($table, $cols) {
+		global $wpdb;
 		$octoList = $this->_getExportData($table, $cols, true);
 		$res = array();
 
@@ -206,7 +236,7 @@ class formsControllerCfs extends controllerCfs {
 			$rowData = array();
 			foreach($octo as $k => $v) {
 				if(!in_array($k, $cols)) continue;
-				$val = mysql_real_escape_string($v);
+				$val = $wpdb->_real_escape($v);
 				if($k == 'unique_id') $uId = $val;
 				$rowData[ $k ] = $val;
 
@@ -222,6 +252,7 @@ class formsControllerCfs extends controllerCfs {
 	 * new usage
 	 */
 	private function _makeExportQueriesLogic($table, $cols, $forceOrd = false) {
+		global $wpdb;
 		$eol = "\r\n";
 		$tab = "\t";
 		$octoList = $this->_getExportData($table, $cols);
@@ -245,7 +276,7 @@ class formsControllerCfs extends controllerCfs {
 				if($k == 'params' && $forceOrd) {
 					$value = utilsCfs::encodeArrayTxt( utilsCfs::decodeArrayTxt( $value ), true );
 				}
-				$arr[] = ''. mysql_real_escape_string($value). '';
+				$arr[] = ''. $wpdb->_real_escape($value). '';
 				$i++;
 			}
 			$valuesArr[] = $arr;
@@ -331,6 +362,14 @@ class formsControllerCfs extends controllerCfs {
 					: false;
 			$redirectUrl = dispatcherCfs::applyFilters('contactSuccessRedirectUrl', $redirectUrl, $lastForm);
 			if(!empty($redirectUrl)) {
+				if(isset($lastForm['params']['tpl']['redirect_to_submitted']) && $lastForm['params']['tpl']['redirect_to_submitted']) {
+					$lastSavedContactId = $this->getModel()->getLastSavedContactId();
+					$redirectUrl = uriCfs::_(array(
+						'baseUrl' => $redirectUrl, 
+						'fid' => $lastForm['id'], 
+						'cid' => $lastSavedContactId, 
+						'hash' => md5(AUTH_KEY. $lastForm['id']. $lastSavedContactId)));
+				}
 				$res->addData('redirect', uriCfs::normal($redirectUrl));
 			}
 			
@@ -388,6 +427,9 @@ class formsControllerCfs extends controllerCfs {
 					} else {
 						$value = $c[ $getKey ];
 					}
+					if(is_array($value)) {
+						$value = implode(', ', $value);
+					}
 					$csvGenerator->addCell($row, $cell, $value);
 					$cell++;
 				}
@@ -405,12 +447,40 @@ class formsControllerCfs extends controllerCfs {
 			CFS_USERLEVELS => array(
 				CFS_ADMIN => array('createFromTpl', 'getListForTbl', 'remove', 'removeGroup', 'clear', 
 					'save', 'getPreviewHtml', 'exportForDb', 'changeTpl', 'saveAsCopy', 'switchActive', 
-					'outPreviewHtml', 'updateLabel', 'exportCsv')
+					'outPreviewHtml', 'updateLabel', 'exportCsv', 'getContactsListForTbl', 'getContactDetails',
+					'removeContactsGroup')
 			),
 		);
 	}
 	public function getNoncedMethods() {
 		return array('save');
+	}
+	public function getContactsListForTbl() {
+		$this->_forceModelName = 'contacts';
+		return parent::getListForTbl();
+	}
+	public function getModel($name = '') {
+		if(empty($name) && !empty($this->_forceModelName)) {
+			$name = $this->_forceModelName;
+		}
+		return parent::getModel( $name );
+	}
+	public function getContactDetails() {
+		$res = new responseCfs();
+		if(($contact = $this->getModel('contacts')->getById(reqCfs::getVar('id'))) != false) {
+			$res->addData('contact', $contact);
+			$form = $this->getModel()->getById( $contact['form_id'] );
+			if($form && $form['params']['fields']) {
+				$res->addData('form_fields', $form['params']['fields']);
+			}
+			$res->addData('form_label', $form['label']);
+		} else
+			$res->pushError ($this->getModel('contacts')->getErrors());
+		return $res->ajaxExec();
+	}
+	public function removeContactsGroup() {
+		$this->_forceModelName = 'contacts';
+		return parent::removeGroup();
 	}
 }
 

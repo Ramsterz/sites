@@ -31,16 +31,19 @@ if( !function_exists( 'otw_spsw_init' ) ){
 	
 	function otw_spsw_init(){
 		
-		global $otw_spsw_plugin_url, $otw_spsw_plugin_options, $otw_spsw_shortcode_component, $otw_spsw_shortcode_object, $otw_spsw_form_component, $otw_spsw_validator_component, $otw_spsw_form_object, $wp_spsw_cs_items, $otw_spsw_js_version, $otw_spsw_css_version, $wp_widget_factory;
+		global $otw_spsw_plugin_url, $otw_spsw_plugin_options, $otw_spsw_shortcode_component, $otw_spsw_shortcode_object, $otw_spsw_form_component, $otw_spsw_validator_component, $otw_spsw_form_object, $wp_spsw_cs_items, $otw_spsw_js_version, $otw_spsw_css_version, $wp_widget_factory, $otw_spsw_factory_component, $otw_spsw_factory_object, $otw_spsw_plugin_id;
 		
 		if( is_admin() ){
 			
+			include_once( 'otw_spsw_process_actions.php' );
 		
 			add_action('admin_menu', 'otw_spsw_init_admin_menu' );
 			
 			add_action('admin_print_styles', 'otw_spsw_enqueue_admin_styles' );
 			
 			add_action('admin_enqueue_scripts', 'otw_spsw_enqueue_admin_scripts');
+			
+			add_filter('otwfcr_notice', 'otw_spsw_factory_message' );
 		}
 		otw_spsw_enqueue_styles();
 		
@@ -65,7 +68,7 @@ if( !function_exists( 'otw_spsw_init' ) ){
 			}
 		}
 		
-		$otw_spsw_shortcode_object->shortcodes['divider'] = array( 'title' => __('Divider', 'otw_spsw'),'enabled' => true,'children' => false, 'parent' => false, 'order' => 17,'path' => dirname( __FILE__ ).'/otw_components/otw_shortcode/', 'url' => $otw_spsw_plugin_url.'/include/otw_components/otw_shortcode/', 'dialog_text' => $otw_spsw_dialog_text  );
+		$otw_spsw_shortcode_object->shortcodes['divider'] = array( 'title' => __('Divider', 'otw_spsw'),'enabled' => true,'children' => false, 'parent' => false, 'order' => 17,'path' => dirname( __FILE__ ).'/otw_components/otw_shortcode/', 'url' => $otw_spsw_plugin_url.'include/otw_components/otw_shortcode/', 'dialog_text' => $otw_spsw_dialog_text  );
 	
 		
 		include_once( plugin_dir_path( __FILE__ ).'otw_labels/otw_spsw_shortcode_object.labels.php' );
@@ -85,6 +88,12 @@ if( !function_exists( 'otw_spsw_init' ) ){
 		$otw_spsw_validator_object = otw_get_component( $otw_spsw_validator_component );
 		$otw_spsw_validator_object->init();
 		
+		$otw_spsw_factory_component = otw_load_component( 'otw_factory' );
+		$otw_spsw_factory_object = otw_get_component( $otw_spsw_factory_component );
+		$otw_spsw_factory_object->add_plugin( $otw_spsw_plugin_id, dirname( dirname( __FILE__ ) ).'/otw_content_manager.php', array( 'menu_parent' => 'otw-spsw-settings', 'lc_name' => __( 'License Manager', 'otw_spsw' ), 'menu_key' => 'otw-spsw' ) );
+		
+		include_once( plugin_dir_path( __FILE__ ).'otw_labels/otw_spsw_factory_object.labels.php' );
+		$otw_spsw_factory_object->init();
 	}
 }
 
@@ -123,7 +132,7 @@ if( !function_exists( 'otw_spsw_enqueue_admin_scripts' ) ){
 		switch( $requested_page ){
 			
 			case 'widgets.php':
-					wp_enqueue_script("otw_shotcode_widget_admin", $otw_spsw_plugin_url.'/include/otw_components/otw_shortcode/js/otw_shortcode_widget_admin.js'  , array( 'jquery', 'thickbox' ), $otw_spsw_js_version );
+					wp_enqueue_script("otw_shotcode_widget_admin", $otw_spsw_plugin_url.'include/otw_components/otw_shortcode/js/otw_shortcode_widget_admin.js'  , array( 'jquery', 'thickbox' ), $otw_spsw_js_version );
 					
 					if(function_exists( 'wp_enqueue_media' )){
 						wp_enqueue_media();
@@ -147,7 +156,7 @@ if( !function_exists( 'otw_spsw_init_admin_menu' ) ){
 		
 		global $otw_spsw_plugin_url;
 		
-		add_menu_page(__('Separator Shortcode And Widget', 'otw_spsw'), __('Separator Shortcode And Widget', 'otw_spsw'), 'manage_options', 'otw-spsw-settings', 'otw_spsw_settings', $otw_spsw_plugin_url.'/images/otw-sbm-icon.png');
+		add_menu_page(__('Separator Shortcode And Widget', 'otw_spsw'), __('Separator Shortcode And Widget', 'otw_spsw'), 'manage_options', 'otw-spsw-settings', 'otw_spsw_settings', $otw_spsw_plugin_url.'images/otw-sbm-icon.png');
 		add_submenu_page( 'otw-spsw-settings', __('Settings', 'otw_spsw'), __('Settings', 'otw_spsw'), 'manage_options', 'otw-spsw-settings', 'otw_spsw_settings' );
 
 	}
@@ -182,5 +191,24 @@ if( !function_exists( 'otw_open_spsw_menu' ) ){
 	}
 }
 
-
+/**
+ * factory messages
+ */
+if( !function_exists( 'otw_spsw_factory_message' ) ){
+	
+	function otw_spsw_factory_message( $params ){
+		
+		global $otw_spsw_plugin_id;
+		
+		if( isset( $params['plugin'] ) && $otw_spsw_plugin_id == $params['plugin'] ){
+			
+			//filter out some messages if need it
+		}
+		if( isset( $params['message'] ) )
+		{
+			return $params['message'];
+		}
+		return $params;
+	}
+}
 ?>

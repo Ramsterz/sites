@@ -721,37 +721,6 @@ input[type="color"] {
 		padding: inherit;
 	}
 }
-/*datepicker*/
-.ui-datepicker {
-	border: 1px solid #000;
-}
-.ui-datepicker .ui-datepicker-header .ui-icon {
-	width: 18px;
-	height: 21px;
-	margin-top: -5px;
-	cursor: pointer;
-	font-size: 1.5em;
-}
-.ui-datepicker .ui-datepicker-header .ui-state-hover .ui-icon {
-	color: #4ae8ea !important;
-}
-.ui-datepicker .ui-datepicker-header .ui-datepicker-prev {
-	left: 2px;
-	top: 2px;
-}
-.ui-datepicker .ui-datepicker-header .ui-datepicker-next {
-	right: 2px;
-	top: 2px;
-}
-.ui-icon-circle-triangle-w:before {
-	content: "\f060";
-}
-.ui-icon-circle-triangle-e:before {
-	content: "\f061";
-}
-.ui-datepicker td span, .ui-datepicker td a {
-	text-align: center !important;
-}
 #containerWrapper {
 	min-height: 308px;
 }

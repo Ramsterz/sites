@@ -132,10 +132,11 @@ class validatorCfs {
         return $res;
     }
     static public function prepareInput($input) {
+		global $wpdb;
         if(is_array($input)) {
             return array_map(array(validator, 'prepareInput'), $input);
         } else
-            return mysql_escape_string($input);
+            return $wpdb->_real_escape($input);
     }
 }
 

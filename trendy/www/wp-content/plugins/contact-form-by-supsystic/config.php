@@ -48,7 +48,7 @@
 	define('CFS_EOL', "\n");    
     
     define('CFS_PLUGIN_INSTALLED', true);
-    define('CFS_VERSION', '1.1.9');
+    define('CFS_VERSION', '1.2.8');
     define('CFS_USER', 'user');
     
     define('CFS_CLASS_PREFIX', 'cfsc');     
@@ -91,4 +91,5 @@
 	define('CFS_LOGIN_REGISTER', 'login_register');
 	define('CFS_BAR', 'bar');
 	define('CFS_SHORTCODE', 'supsystic-form');
+	define('CFS_SHORTCODE_SUBMITTED', 'supsystic-form-submitted');
 
