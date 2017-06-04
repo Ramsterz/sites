@@ -1,11 +1,11 @@
 <?php
 
-define( 'WPCACHEHOME', '/home/trendy/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/projects/sites/trendy/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_CACHE', true); //Added by WP-Cache Manager
 define('DB_NAME', 'trendypost');
 define('DB_USER', 'trendypost');
-define('DB_PASSWORD', 'Xdqr9VfQYsEqhduJ');
-define('DB_HOST', 'ladypost.cxsgb8skibzn.us-west-2.rds.amazonaws.com');
+define('DB_PASSWORD', 'admin');
+define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
@@ -30,4 +30,3 @@ if ( !defined('ABSPATH') )
 require_once(ABSPATH . 'wp-settings.php');
 
 define('FS_METHOD', 'direct');
-

@@ -7969,12 +7969,12 @@ CSS ANIMATION STYLES
     margin-top: 5px;
   }
 
-  /* 
-   * Tipper v3.1.0 - 2014-11-25 
-   * A jQuery plugin for simple tooltips. Part of the formstone library. 
-   * http://formstone.it/tipper/ 
-   * 
-   * Copyright 2014 Ben Plum; MIT Licensed 
+  /*
+   * Tipper v3.1.0 - 2014-11-25
+   * A jQuery plugin for simple tooltips. Part of the formstone library.
+   * http://formstone.it/tipper/
+   *
+   * Copyright 2014 Ben Plum; MIT Licensed
    */
   .tipper {
     width: 1px;
@@ -9581,8 +9581,8 @@ RETINA (2x RESOLUTION DEVICES)
   display: inline-block;
   margin: 2px 2px 2px 0;
   border: 3px solid transparent;
-  background: #1a1a1a;
-  font-size: 25px;
+  background: #e3c31a;
+  font-size: 35px;
   font-weight: 700;
   padding: 15px 40px;
   text-transform: uppercase;
@@ -9593,5 +9593,5 @@ RETINA (2x RESOLUTION DEVICES)
 	width:100%;
 }
   .article-footer .article-footer-pages a:hover, .article-footer .article-footer-pages a:focus {
-    background: #333333 !important;
+    background: rgba(227, 195, 26, 0.75) !important
   }
