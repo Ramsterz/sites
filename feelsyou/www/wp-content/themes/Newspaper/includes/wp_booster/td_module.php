@@ -73,7 +73,14 @@ abstract class td_module {
         return '';
     }
 
-
+function get_custom_ads() {
+	if (!is_single()) {
+			return '';
+	}
+	$buffy = ''; //the vampire slayer
+	$buffy .= '<div>TESTTESTTEST</div>';
+	return $buffy;
+}
     /**
      * @deprecated - google changed the structured data requirements and we no longer use them on modules
      */

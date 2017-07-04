@@ -30,6 +30,7 @@ if (have_posts()) {
         <?php echo $td_mod_single->get_social_sharing_bottom();?>
         <?php echo $td_mod_single->get_next_prev_posts();?>
         <?php echo $td_mod_single->get_author_box();?>
+				<?php echo $td_mod_single->get_custom_ads();?>
         <?php echo $td_mod_single->get_item_scope_meta();?>
     </footer>
 

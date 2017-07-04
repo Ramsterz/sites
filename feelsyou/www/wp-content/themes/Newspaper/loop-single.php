@@ -35,9 +35,9 @@ if (have_posts()) {
         </div>
 
         <?php echo $td_mod_single->get_social_sharing_top();?>
-        
+
         <?php dynamic_sidebar( 'custom-widget-area-post-top' ); ?>
-        
+
         <div class="td-post-content">
 
         <?php
@@ -66,11 +66,12 @@ if (have_posts()) {
             <?php echo $td_mod_single->get_social_sharing_bottom();?>
             <?php echo $td_mod_single->get_next_prev_posts();?>
             <?php echo $td_mod_single->get_author_box();?>
+						<?php echo $td_mod_single->get_custom_ads();?>
 	        <?php echo $td_mod_single->get_item_scope_meta();?>
         </footer>
 
     </article> <!-- /.post -->
-    
+
     <?php echo $td_mod_single->related_posts();?>
 
 <?php

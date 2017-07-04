@@ -20654,7 +20654,7 @@ body .td-page-title {
     Pagination
 */
 .page-nav {
- 
+
   margin: 30px 0 30px 0;
   font-family: 'Open Sans', arial, sans-serif;
   font-size: 12px;
@@ -32606,13 +32606,13 @@ body.td-animation-stack-type0 .post img {
   transition-timing-function: cubic-bezier(0.39, 0.76, 0.51, 0.56);
   /* linear */
 }
-body.td-animation-stack-type1 .td-animation-stack .entry-thumb,
+/*body.td-animation-stack-type1 .td-animation-stack .entry-thumb,
 body.td-animation-stack-type1 .post .entry-thumb,
 body.td-animation-stack-type1 .post img[class*="wp-image-"],
 body.td-animation-stack-type1 .post a.td-sml-link-to-image > img {
   opacity: 0;
   transform: scale(0.95);
-}
+}*/
 .td-animation-stack-type1-2 {
   opacity: 1 !important;
   transform: scale(1) !important;
@@ -32625,6 +32625,7 @@ body.td-animation-stack-type1 .post a.td-sml-link-to-image > img {
   -o-transition: transform 0.5s ease, opacity 0.3s cubic-bezier(0.39, 0.76, 0.51, 0.56) 0s;
   transition: transform 0.5s ease, opacity 0.3s cubic-bezier(0.39, 0.76, 0.51, 0.56) 0s;
 }
+/*
 body.td-animation-stack-type2 .td-animation-stack .entry-thumb,
 body.td-animation-stack-type2 .post .entry-thumb,
 body.td-animation-stack-type2 .post img[class*="wp-image-"],
@@ -32636,6 +32637,7 @@ body.td-animation-stack-type2 .post a.td-sml-link-to-image > img {
   -ms-transform: translate(0px, 10px);
   -o-transform: translate(0px, 10px);
 }
+*/
 .td-animation-stack-type2-2 {
   opacity: 1 !important;
   transform: scale(1) !important;

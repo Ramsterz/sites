@@ -43,7 +43,7 @@ class td_module_single_base extends td_module {
                 'nextpagelink'     => 'NEXT <i class="td-icon-menu-right big-arrow"></i>',
                 'previouspagelink' => '<i class="td-icon-menu-left big-arrow"></i> BACK'
                 ));
-            } 
+            }
             if($numpages == $page) {
                 return wp_link_pages(array(
                 'before' => '<div class="page-nav page-nav-post big-back-button td-pb-padding-side">',
@@ -66,8 +66,8 @@ class td_module_single_base extends td_module {
                 'previouspagelink' => '<i class="td-icon-menu-left big-arrow"></i>BACK'
                 ));
             }
-            
-            
+
+
     }
 
 
@@ -515,7 +515,14 @@ class td_module_single_base extends td_module {
             return 'itemscope itemtype="' . td_global::$http_or_https . '://schema.org/Article"';
         }
     }
-
+		function get_custom_ads() {
+			if (!is_single()) {
+					return '';
+			}
+			$buffy = ''; //the vampire slayer
+			$buffy .= '<div>ILAN</div>';
+			return $buffy;
+		}
 
     /**
      * This method outputs the item scope for SINGLE templates. If you are looking for the modules @see td_module::get_item_scope_meta()

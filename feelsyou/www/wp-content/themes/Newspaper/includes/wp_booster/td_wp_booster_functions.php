@@ -1118,7 +1118,7 @@ function wp_link_pages_args_prevnext_add($args)
 	if (!$args['next_or_number'] == 'next_and_number')
 		return $args; # exit early
 
-	
+
 	$args['next_or_number'] = 'next'; # keep numbering for the main part
 	if (!$more)
 		return $args; # exit early
@@ -1127,7 +1127,7 @@ function wp_link_pages_args_prevnext_add($args)
 		$args['before'] .= _wp_link_page($page-1)
 		                   . $args['link_before']. $args['previouspagelink'] . $args['link_after'] . '</a>'
 		;
-    
+
 	if ($page<$numpages) # there is a next page
 		$args['after'] = _wp_link_page($page+1)
 		                 . $args['link_before'] . $args['nextpagelink'] . $args['link_after'] . '</a>'
@@ -1287,7 +1287,7 @@ function td_vc_init() {
 	if (function_exists('vc_disable_frontend')) {
 		vc_disable_frontend();
 	}
-    
+
 
 }
 
@@ -2359,4 +2359,3 @@ function td_customize_js() {
           </script>
          ";
 }
-
