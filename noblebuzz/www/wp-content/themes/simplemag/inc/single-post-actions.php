@@ -176,8 +176,8 @@ function single_main_content() {
 
     // Output the main editor content
     the_content();
-    echo do_shortcode('[widget id="ti_code_banner-3"]');
     echo do_shortcode('[widget id="ti_code_banner-4"]');
+    echo do_shortcode('[widget id="ti_code_banner-3"]');
     // Output pagination if post uses <!--nextpage--> short tag
     $args = array(
         'before' => '<div class="link-pages">',
