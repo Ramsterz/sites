@@ -1,0 +1,150 @@
+/*
+Theme Name: SimpleMag Child Theme
+Theme URI: http://themesindep.com/
+Author: ThemesIndep
+Author URI: http://themesindep.com/
+Description: Magazine theme for creative things
+Template: simplemag
+*/
+
+
+/* Your CSS code goes here
+-------------------------------------- */
+#site {
+  background-color:#FFF;
+}
+.top-strip {
+  height: 80px;
+}
+.secondary-menu li a {
+  padding-top:22px;
+  padding-right:7px;
+}
+.top-strip-logo a {
+  top:3px;
+}
+.main-menu .menu, .secondary-menu .menu {
+  text-align:right;
+}
+.single-post.ltr:not(.woocommerce) .entry-content > p:first-of-type:first-letter {
+  float:inherit;
+  font-size:inherit;
+  line-height:inherit;
+  font-weight:inherit;
+  padding:inherit;
+}
+.top-strip-fixed:not(.hide-strip) .site-content {
+  padding-top:80px;
+}
+.wp-pagenavi a, .wp-pagenavi span {
+    display: block;
+    width: 49%;
+    float: left;
+    text-align: center;
+}
+
+.link-pages a .arrow {
+  padding: 0 0;
+}
+.link-pages a {
+  display:block;
+  float: left;
+  width:48%;
+  height: 90px;
+  background-color: #0288d1;
+  border-radius: 8px;
+}
+@keyframes hovering {
+  from {
+    background-color: #0288d1;
+  }
+  to {
+    background-color: #006aa5;
+  }
+}
+.link-pages {
+  border: 0px;
+}
+.top-strip {
+  background:linear-gradient(to bottom, #fff 40%, #f6f6f6)
+}
+.link-pages a:hover {
+  animation-name: hovering;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+.link-pages .seperator {
+  float: left;
+  width: 4%;
+}
+.link-pages span, .link-pages a span {
+  color: #fff;
+  line-height: 85px;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-transform:scale(1,1.5); /* Safari and Chrome */
+  -moz-transform:scale(1,1.5); /* Firefox */
+  -ms-transform:scale(1,1.5); /* IE 9 */
+  -o-transform:scale(1,1.5); /* Opera */
+  transform:scale(1,1.5);
+  display: inline-block;
+}
+.link-pages a:only-of-type {
+  width:100%;
+}
+.sidebar {
+  padding:0;
+}
+.sidebar .widget {
+  border-bottom: none !important;
+}
+.title-with-sep .entry-title {
+  color:#444444;
+}
+
+.entry-content ol, .entry-content ul {
+  padding-left: 15px;
+}
+.title-text h1, .entry-content h1 {
+  font-size: 30px;
+}
+.title-text h2, .entry-content h2 {
+  font-size: 24px;
+}
+.title-text h3, .entry-content h3 {
+  font-size: 19px;
+}
+.title-text h4, .entry-content h4 {
+  font-size: 17px;
+}
+.link-pages {
+  margin:20px 0px;
+  padding: 20px 0px;
+}
+.advertisement .ad-divider {
+  border-bottom: solid 1px #aaa;
+  margin: 20px 8%;
+  color: #aaa;
+  height: 12px;
+}
+.advertisement .ad-divider span {
+  background-color: #fff;
+  font-size:13px;
+}
+.page-title .entry-title {
+  font-size:38px !important;
+}
+.sidebar {
+  padding:0px 45px;
+}
+/*  --------------       Wasi              -----------------*/
+
+.cat-description{
+	width:100%;
+	max-width:100%;
+    margin-bottom: 0px
+}
+
+.cols .col {
+    padding-left: 0px !important;
+}
