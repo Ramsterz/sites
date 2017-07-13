@@ -46,7 +46,7 @@ global $ti_option;
 						<?php
 						// Output the main editor content
 						the_content();
-    				do_shortcode('[widget id="ti_code_banner-3"]');
+    				echo do_ramsterz('lbtaboola_ad');
 
 						// Output pagination if post uses <!--nextpage--> short tag
 						$args = array(

@@ -176,8 +176,10 @@ function single_main_content() {
 
     // Output the main editor content
     the_content();
-    echo do_shortcode('[widget id="ti_code_banner-2"]');
-    echo do_shortcode('[widget id="ti_code_banner-3"]');
+    //echo do_shortcode('[widget id="ti_code_banner-2"]');
+		echo do_ramsterz('lbadsense_ad');
+		echo do_ramsterz('lbtaboola_ad');
+    //echo do_shortcode('[widget id="ti_code_banner-3"]');
     // Output pagination if post uses <!--nextpage--> short tag
     $args = array(
         'before' => '<div class="link-pages">',

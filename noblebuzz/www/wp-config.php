@@ -1,4 +1,5 @@
 <?php
+define( 'WPCACHEHOME', '/projects/sites/noblebuzz/www/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] );
 define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME'] );
 
